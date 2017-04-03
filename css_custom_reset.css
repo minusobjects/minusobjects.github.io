@@ -1,0 +1,57 @@
+
+
+html, body, section, header, footer, ul, ol, li, h1, h2, figure, figcaption, aside, form, p {
+
+  margin: 0;
+  border: 0;
+  padding: 0;
+
+  font: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  color: inherit;
+  background: transparent;
+
+}
+
+body {
+  padding: 30px;
+  font-family: sans-serif;
+}
+
+h1, h2 {
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+input[type="radio"], input[type="submit"], select {
+  /*note that 'select' is just 'select'*/
+  cursor: pointer;
+  outline: none;
+}
+
+input[type="radio"] {
+    width: 27px;
+    height: 27px;
+    background-image: url(stars.png);
+    -webkit-appearance: none;
+    /*not sure why this webkit setting
+    needs to be here (from solution)*/
+    vertical-align: bottom;
+}
+
+input[type="radio"]:checked {
+  background-position: 30px 30px;
+}
+
+input:last-child {
+    background: gold;
+}
+
+input:last-child:hover {
+    filter: brightness(60%);
+}
+
+ol li:nth-of-type(2n) {
+  background-color: #ddd;
+}
