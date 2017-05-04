@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Will it work?</title>
+
+    <style>
+      html, body, canvas {
+        padding: 0px;
+        margin: 0px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <label>Image File:<br/>
+    <input type="file" id="imageLoader" name="imageLoader"/>
+    </label>
+    <br/><br/>
+    <label>Audio File 1:<br/>
+    <input type="file" class="audioLoader" id="audio1" name="audioLoader1"/>
+    </label>
+    <br/><br/>
+    <label>Audio File 2:<br/>
+    <input type="file" class="audioLoader" id="audio2" name="audioLoader2"/>
+    </label>
+    <br/><br/>
+    <label>Audio File 3:<br/>
+    <input type="file" class="audioLoader" id="audio3" name="audioLoader3"/>
+    </label>
+    <br/><br/>
+    <button id='playButton'>Play button!</button>
+    <button id='pauseButton'>Pause button!</button>
+    <button id='stopButton'>Stop button!</button>
+    <br/><br/>
+    <label> Volume 1
+    <input type='text' id='volumeNumber'></input>
+    </label>
+    <br/><br/>
+    <canvas></canvas>
+    <script src="howler-dist/howler.js"></script>
+    <script src="test_canvas.js"></script>
+  </body>
+</html>
