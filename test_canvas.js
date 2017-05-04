@@ -5,16 +5,17 @@ canvasEl.width = window.innerWidth / 2;
 
 const ctx = canvasEl.getContext('2d');
 
-// load default image
-    let defaultImg = new Image();
-    defaultImg.src = './defaults/rgb_default.png';
-    defaultImg.onload = function(){
-        canvasEl.width = defaultImg.width / 2;
-        canvasEl.height = defaultImg.height / 2;
-        ctx.drawImage(defaultImg,0,0,defaultImg.width / 2,defaultImg.height / 2);
-    }
+load default image, set to canvas
+let defaultImg = new Image();
+defaultImg.src = './defaults/rgb_default.png';
+defaultImg.setAttribute('crossOrigin', '');
+defaultImg.onload = function(){
+  canvasEl.width = defaultImg.width / 2;
+  canvasEl.height = defaultImg.height / 2;
+  ctx.drawImage(defaultImg,0,0,defaultImg.width / 2,defaultImg.height / 2);
+}
 
-// no reason this couldn't work with multiple files, right?
+// load default audio - seems to work fine with multiple files
 let defaultHowl1 = new Howl({
   preload: true,
   volume: 0.5,
@@ -65,6 +66,15 @@ soundObj['audio1'] = defaultHowl1;
 soundObj['audio2'] = defaultHowl2;
 soundObj['audio3'] = defaultHowl3;
 
+const colorInfoButton = document.getElementById('colorInfoButton');
+colorInfoButton.addEventListener('click', getColorInfo, false);
+
+function getColorInfo(){
+  let pixelInfo;
+  console.log('You clicked color button!');
+  pixelInfo = ctx.getImageData(0,0,20,canvasEl.height);
+  debugger
+}
 
 const imageLoader = document.getElementById('imageLoader');
 imageLoader.addEventListener('change', handleImage, false);
