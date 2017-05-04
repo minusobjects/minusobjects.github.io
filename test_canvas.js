@@ -6,9 +6,11 @@ canvasEl.width = window.innerWidth / 2;
 const ctx = canvasEl.getContext('2d');
 
 //load default image, set to canvas
+// BUT not working locally!
+// need to use File API here?
 let defaultImg = new Image();
-defaultImg.src = './defaults/rgb_default.png';
-defaultImg.setAttribute('crossOrigin', '');
+defaultImg.src = 'defaults/rgb_default.png';
+ // defaultImg.setAttribute('crossOrigin', '');
 defaultImg.onload = function(){
   canvasEl.width = defaultImg.width / 2;
   canvasEl.height = defaultImg.height / 2;
@@ -16,10 +18,11 @@ defaultImg.onload = function(){
 }
 
 // load default audio - seems to work fine with multiple files
+// BUT having errors locally!
 let defaultHowl1 = new Howl({
   preload: true,
   volume: 0.5,
-  src: './defaults/neverturnback.mp3',
+  src: 'defaults/neverturnback.mp3',
   onload: function() {
     console.log('Loaded Default 1!');
   },
@@ -34,7 +37,7 @@ let defaultHowl1 = new Howl({
 let defaultHowl2 = new Howl({
   preload: true,
   volume: 0.5,
-  src: './defaults/80s_vibe.mp3',
+  src: 'defaults/80s_vibe.mp3',
   onload: function() {
     console.log('Loaded Default 2!');
   },
@@ -49,7 +52,7 @@ let defaultHowl2 = new Howl({
 let defaultHowl3 = new Howl({
   preload: true,
   volume: 0.5,
-  src: './defaults/rave_digger.mp3',
+  src: 'defaults/rave_digger.mp3',
   onload: function() {
     console.log('Loaded Default 3!');
   },
