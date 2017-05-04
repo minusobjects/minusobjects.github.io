@@ -5,7 +5,7 @@ canvasEl.width = window.innerWidth / 2;
 
 const ctx = canvasEl.getContext('2d');
 
-load default image, set to canvas
+//load default image, set to canvas
 let defaultImg = new Image();
 defaultImg.src = './defaults/rgb_default.png';
 defaultImg.setAttribute('crossOrigin', '');
