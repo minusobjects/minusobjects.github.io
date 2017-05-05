@@ -30,15 +30,17 @@
     <input type="file" class="audioLoader" id="audio3" name="audioLoader3"/>
     </label>
     <br/><br/>
-    <button id='playButton'>Play button!</button>
+    <button id='colorInfoButton'>Color timer!</button>
+    <br/><br/>
     <button id='pauseButton'>Pause button!</button>
-    <button id='stopButton'>Stop button!</button>
     <br/><br/>
-    <label> Volume 1
-    <input type='text' id='volumeNumber'></input>
-    </label>
+    <button id='stopIntervalButton'>Stop the insanity!</button>
     <br/><br/>
-    <button id='colorInfoButton'>Get some color info!</button>
+    <div id='volumeTest'>
+      Volume?
+    </div>
+    <!-- note that this does work to load an img in -->
+    <img src="defaults/rgb_default.png" style="display:none;" id="htmlImg"/>
     <script src="howler-dist/howler.js"></script>
     <script src="test_canvas.js"></script>
   </body>
