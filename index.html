@@ -1,47 +1,239 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-  <head>
-    <title>Will it work?</title>
+	<head>
+		<title>Meow Meow</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" type="text/css" href="assets/css/devicons.css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 
-    <style>
-      html, body, canvas {
-        padding: 0px;
-        margin: 0px;
-      }
-    </style>
-  </head>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  <body>
-    <canvas></canvas>
-    <br/><br/>
-    <label>Image File:<br/>
-    <input type="file" id="imageLoader" name="imageLoader"/>
-    </label>
-    <br/><br/>
-    <label>Audio File 1:<br/>
-    <input type="file" class="audioLoader" id="audio1" name="audioLoader1"/>
-    </label>
-    <br/><br/>
-    <label>Audio File 2:<br/>
-    <input type="file" class="audioLoader" id="audio2" name="audioLoader2"/>
-    </label>
-    <br/><br/>
-    <label>Audio File 3:<br/>
-    <input type="file" class="audioLoader" id="audio3" name="audioLoader3"/>
-    </label>
-    <br/><br/>
-    <button id='colorInfoButton'>Color timer!</button>
-    <br/><br/>
-    <button id='pauseButton'>Pause button!</button>
-    <br/><br/>
-    <button id='stopIntervalButton'>Stop the insanity!</button>
-    <br/><br/>
-    <div id='volumeTest'>
-      Volume?
-    </div>
-    <!-- note that this does work to load an img in -->
-    <img src="defaults/rgb_default.png" style="display:none;" id="htmlImg"/>
-    <script src="howler-dist/howler.js"></script>
-    <script src="test_canvas.js"></script>
-  </body>
+		  ga('create', 'UA-93699540-1', 'auto');
+		  ga('send', 'pageview');
+	</script>
+	</head>
+	<body>
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Welcome</a></li>
+							<li><a href="#one">Projects</a></li>
+							<li><a href="#two">Skills</a></li>
+							<li><a href="#three">Contact</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Meow Meow</h1>
+
+							<p>I am a cat. Hire me to be a cat for you. I am a cat. Hire me to be a cat for you. I am a cat. Hire me to be a cat for you. I am a cat. Hire me to be a cat for you. I am a cat. Hire me to be a cat for you. I am a cat. Hire me to be a cat for you.</p>
+
+							<ul class="actions">
+								<li><a href="#one" class="button scrolly">Projects</a></li>
+								<li><a href="assets/docs/ChristopherPineda-Resume.pdf" class="button scrolly" target="_blank">Resume</a></li>
+								<li><a href="mailto:pineda.christopher@gmail.com" class="button scrolly">Email</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- One -->
+					<section id="one" class="wrapper style2 spotlights">
+						<section>
+							<a href="http://www.adagio-app.com/" class="image" target="_blank"><img src="images/message-cap.png" alt="Message" data-position="left top" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Message</h2>
+									<p>Full-stack blogging app inspired by Medium, built with Ruby on Rails, JavaScript, React.js/Redux, HTML5, and CSS3</p>
+									<ul>
+										<li>Leveraged complex SQL queries via Ruby on Rails/ActiveRecord and jBuilder to quickly load user information from the database, improving overall app performance. </li>
+										<li>Integrated the QuillJS API to facilitate seamless inline HTML editing.</li>
+										<li>Utilized modular React/JavaScript components and CSS transitions to create a streamlined, stylish UI.</li>
+									</ul>
+									<ul class="actions">
+										<li><a href="https://github.com/therealpineda/adagio" class="button" target="_blank">GitHub</a></li>
+										<li><a href="http://www.adagio-app.com/" class="button" target="_blank">Live Demo</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="http://www.therealpineda.com/ternary_town/" class="image" target="_blank"><img src="images/ternary-town.png" alt="" data-position="left top" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Hum</h2>
+									<p>Visual music mixer, built with JavaScript, HTML5/Canvas, and CSS3</p>
+									<ul>
+										<li>Implemented JavaScript image analysis to dynamically interpret color data.</li>
+										<li>Devised custom JavaScript algorithms to manage audio manipulation.</li>
+										<li>Worked with the HowlerJS API and HTML5 File API to create intuitive UX.</li>
+									</ul>
+									<ul class="actions">
+										<li><a href="https://github.com/therealpineda/ternary_town" class="button" target="_blank">GitHub</a></li>
+										<li><a href="http://www.therealpineda.com/ternary_town/" class="button" target="_blank">Live Demo</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="https://github.com/therealpineda/dom_helper" class="image" target="_blank"><img src="images/dom-helper.png" alt="" data-position="left top" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Chess</h2>
+									<p>Terminal chess game, built in Ruby.</p>
+									<ul>
+										<li>Implemented object-oriented programming patterns to create a fully-functional chess game.</li>
+										<li>Developed algorithms to calculate possible moves and game state.</li>
+									</ul>
+									<ul class="actions">
+										<li><a href="https://github.com/therealpineda/dom_helper" class="button" target="_blank">GitHub</a></li>
+										<!-- <li><a href="" class="button" target="_blank">Live Demo</a></li> -->
+									</ul>
+								</div>
+							</div>
+						</section>
+					</section>
+
+				<!-- Two -->
+					<section id="two" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Skills</h2>
+							<div class="features">
+								<section>
+									<span class="icon major devicons devicons-javascript_badge"></span>
+									<h3>JavaScript</h3>
+								</section>
+								<section>
+									<span class="icon major devicons devicons-jquery"></span>
+									<h3>jQuery</h3>
+								</section>
+								<section>
+									<span class="icon major devicons devicons-react"></span>
+									<h3>React.js</h3>
+								</section>
+								<section>
+									<span class="icon major devicons devicons-code"></span>
+									<h3>Redux</h3>
+								</section>
+								<section>
+									<span class="icon major devicons devicons-ruby"></span>
+									<h3>Ruby</h3>
+								</section>
+								<section>
+									<span class="icon major devicons devicons-ruby_on_rails"></span>
+									<h3>Rails</h3>
+								</section>
+								<section>
+									<span class="icon major devicons devicons-html5"></span>
+									<h3>HTML</h3>
+								</section>
+								<section>
+									<span class="icon major devicons devicons-css3"></span>
+									<h3>CSS</h3>
+								</section>
+								<section>
+									<span class="icon major devicons devicons-code_badge"></span>
+									<h3>RSpec</h3>
+								</section>
+								<section>
+									<span class="icon major devicons devicons-database"></span>
+									<h3>SQL</h3>
+								</section>
+								<section>
+									<span class="icon major devicons devicons-git"></span>
+									<h3>Git</h3>
+								</section>
+								<section>
+									<span class="icon major devicons devicons-heroku"></span>
+									<h3>Heroku</h3>
+								</section>
+								<section>
+									<span class="icon major devicons devicons-photoshop"></span>
+									<h3>Photoshop</h3>
+								</section>
+								<section>
+									<span class="icon major devicons devicons-illustrator"></span>
+									<h3>Illustrator</h3>
+								</section>
+							</div>
+						</div>
+					</section>
+
+				<!-- Three -->
+					<section id="three" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>Contact</h2>
+							<img src="images/message-cap.png" alt="Message" data-position="left top" style="width:80px;border-radius:50%;margin-left:10px"/>
+							<p>I'm a cat. Meow.</p>
+							<ul class="contact">
+								<li>
+									<h3>Location</h3>
+									<span>Brooklyn, NY</span>
+								</li>
+								<li>
+									<h3>Email</h3>
+									<a href="mailto:mn@one-timepad.com">mn@one-timepad.com</a>
+								</li>
+								<li>
+									<h3>Phone</h3>
+									<span>(614) 561-2923</span>
+								</li>
+								<li>
+									<h3>Social</h3>
+									<ul class="icons">
+										<li><a href="https://www.linkedin.com/in/therealpineda/" class="fa fa-linkedin social-icon" target="_blank"><span class="label">LinkedIn</span></a></li>
+										<li><a href="https://angel.co/christopher-pineda-1" class="fa fa-angellist social-icon" target="_blank"><span class="label">AngelList</span></a></li>
+										<li><a href="https://github.com/therealpineda" class="fa fa-github social-icon" target="_blank"><span class="label">GitHub</span></a></li>
+										<!-- <li><a href="https://twitter.com/therealpineda" class="fa fa-twitter social-icon" target="_blank"><span class="label">Twitter</span></a></li> -->
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Michael Newton. All rights reserved.</li><li>Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>
