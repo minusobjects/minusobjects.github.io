@@ -205,22 +205,6 @@ function handleImage(e){
     reader.readAsDataURL(e.target.files[0]);
 }
 
-// this does seem to work to load images into the canvas
-// var htmlImg = document.getElementById("htmlImg");
-// htmlImg.onload = function ()
-// {
-//   ctx.drawImage(htmlImg, 0, 0);
-// }
-
-let SampleRGB1 = document.getElementById("Hum_RGB_1");
-let SampleRGB2 = document.getElementById("Hum_RGB_2");
-let SampleRGB3 = document.getElementById("Hum_RGB_3");
-let SampleRGB4 = document.getElementById("Hum_RGB_4");
-
-// meow
-// default image. doesn't work locally.
-currentImg = SampleRGB1;
-
 const purpleButton = document.getElementById('purpleButton');
 purpleButton.addEventListener('click', ()=>{curColor = colorPurple;});
 
@@ -344,5 +328,14 @@ function redraw(){
   }
 }
 
- // when default image is loaded in
-redraw();
+let SampleRGB1 = document.getElementById("Hum_RGB_1");
+let SampleRGB2 = document.getElementById("Hum_RGB_2");
+let SampleRGB3 = document.getElementById("Hum_RGB_3");
+let SampleRGB4 = document.getElementById("Hum_RGB_4");
+
+// meow
+// default image. doesn't work locally.
+SampleRGB1.onload = function(){
+  currentImg = SampleRGB1;
+  redraw();
+}
