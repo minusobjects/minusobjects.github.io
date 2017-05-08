@@ -1,8 +1,7 @@
 ## Mike Newton - Portfolio Site
-(I took the skeleton from Chris Pineda; working on it.)
-Web Developer with experience in front and back-end languages and frameworks including React, Redux, JavaScript, HTML, CSS, Rails, and SQL. New York, NY. <pineda.christopher@gmail.com>
+Web developer with a background in visual design. Experienced in JavaScript, React/Redux, Ruby, Rails, HTML5, CSS3, and SQL. I love the logical challenges of coding, and the satisfaction of seeing a great project come together. <mn@one-timepad.com>
 
-:computer: [Live Website](http://www.therealpineda.com/)
+:computer: [Live Website](https://minusobjects.github.io/)
 
 
 - - -
