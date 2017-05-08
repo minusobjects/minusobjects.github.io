@@ -31,12 +31,21 @@ ul {
   opacity: 1;
 }
 .innerInstrux{
+  border-radius:6px;
   position:fixed;
   width:600px;
   top:30px;
   left:50%;
   margin-left:-300px;
   background-color:bisque;
+  padding-left:30px;
+  padding-right:20px;
+  padding-bottom:30px;
+  padding-top:20px;
+  color:#888;
+}
+.innerInstrux h3{
+  margin-bottom:.3em;
 }
 
 .mainDiv{

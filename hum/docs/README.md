@@ -1,5 +1,12 @@
 ## Hum
 
+**Known issues, 5-7-17**
+- No error handling yet for when users input incorrect files.
+- Need to see if I can get the canvas to re-render quicker after paint input.
+- Styling could be tighter.
+- Need to break JS file into multiple files.
+- Need to add live links in instructions.
+
 ### Background
 
 Hum will be a tool to mix sound via images: the RGB pixel data of a given image will modulate the volume of three sound files (one for each channel). My goal for this project is that it may be a fun and intuitive music-making tool for people without much musical experience (which would include myself).

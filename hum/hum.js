@@ -14,45 +14,18 @@ let defaultHowl1 = new Howl({
   preload: true,
   volume: 0,
   src: 'defaults/Red_sample.wav',
-  onload: function() {
-    console.log('Loaded Default 1!');
-  },
-  onplay: function() {
-    console.log('Playing Default 1!');
-  },
-  onend: function() {
-    console.log('Finished Default 1!');
-  }
 });
 
 let defaultHowl2 = new Howl({
   preload: true,
   volume: 0,
   src: 'defaults/Green_sample.wav',
-  onload: function() {
-    console.log('Loaded Default 2!');
-  },
-  onplay: function() {
-    console.log('Playing Default 2!');
-  },
-  onend: function() {
-    console.log('Finished Default 2!');
-  }
 });
 
 let defaultHowl3 = new Howl({
   preload: true,
   volume: 0,
   src: 'defaults/Blue_sample.wav',
-  onload: function() {
-    console.log('Loaded Default 3!');
-  },
-  onplay: function() {
-    console.log('Playing Default 3!');
-  },
-  onend: function() {
-    console.log('Finished Default 3!');
-  }
 });
 
 let soundObj = {};
@@ -134,7 +107,6 @@ function stopInterval(){
   bar.style.display = `none`;
   redraw();
   current_x = 0;
-  console.log('Interval stopped!')
 }
 
 const audioLoaders = document.getElementsByClassName('audioLoader');
@@ -148,7 +120,6 @@ pauseButton.addEventListener('click', pauseInterval, false);
 function pauseInterval(){
   pauseAll();
   window.clearInterval(setInt);
-  console.log('Interval paused!')
 }
 
 function playAll(){
@@ -179,15 +150,6 @@ function handleAudio(e){
         preload: true,
         volume: 0,
         src: [event.target.result],
-        onload: function() {
-          console.log('Loaded!');
-        },
-        onplay: function() {
-          console.log('Playing!');
-        },
-        onend: function() {
-          console.log('Finished!');
-        }
       });
       soundObj[audioId] = howl;
       setAudioNames();
