@@ -9,7 +9,7 @@ const ctx = canvasEl.getContext('2d');
 const bar = document.getElementById("bar");
 
 // load default audio - seems to work fine with multiple files
-// BUT having errors locally...
+// BUT having CORS errors locally...
 let defaultHowl1 = new Howl({
   preload: true,
   volume: 0,
@@ -60,6 +60,13 @@ soundObj['audio1'] = defaultHowl1;
 soundObj['audio2'] = defaultHowl2;
 soundObj['audio3'] = defaultHowl3;
 
+let audioNames = {};
+audioNames['audio1'] = 'Red_sample.wav';
+audioNames['audio2'] = 'Green_sample.wav';
+audioNames['audio3'] = 'Blue_sample.wav';
+
+setAudioNames();
+
 let setInt;
 let current_x = 0;
 
@@ -81,7 +88,6 @@ function colorTimeline(){
     function moveHead(){
         current_x++;
         getColorInfo(current_x);
-        // redraw();
         bar.style.marginLeft = `${current_x}px`;
         if(current_x >= canvasEl.width){
           stopInterval();
@@ -113,8 +119,9 @@ function getColorInfo(x_coord){
   soundObj['audio2'].volume(greenSum/max);
   soundObj['audio3'].volume(blueSum/max);
 
-  // seems to work fine; could also do: element.setAttribute("style", "background-color: red;");
-  document.getElementById("volumeTest").innerHTML = redSum/max;
+  document.getElementById("redVol").setAttribute(`style`, `background-color:rgba(255,0,0,${redSum/max});color:red;`);
+  document.getElementById("greenVol").setAttribute(`style`, `background-color:rgba(0,255,0,${greenSum/max});color:green;`);
+  document.getElementById("blueVol").setAttribute(`style`, `background-color:rgba(0,0,255,${blueSum/max});color:blue`);
 }
 
 const stopIntervalButton = document.getElementById('stopIntervalButton');
@@ -123,7 +130,6 @@ stopIntervalButton.addEventListener('click', stopInterval, false);
 function stopInterval(){
   stopAll();
   window.clearInterval(setInt);
-  //also needs to account for bar now
   bar.style.marginLeft = `0px`;
   bar.style.display = `none`;
   redraw();
@@ -184,7 +190,9 @@ function handleAudio(e){
         }
       });
       soundObj[audioId] = howl;
+      setAudioNames();
     }
+    audioNames[audioId] = e.target.files[0].name;
     reader.readAsDataURL(e.target.files[0]);
 }
 
@@ -192,49 +200,52 @@ const imageLoader = document.getElementById('imageLoader');
 imageLoader.onclick = function(){this.value = null;};
 imageLoader.addEventListener('change', handleImage, false);
 
+let currentImgName;
+
 function handleImage(e){
     let reader = new FileReader();
     reader.onload = function(event){
       let img = new Image();
       img.onload = function(){
         currentImg = img;
+        setImageName()
         redraw();
       }
       img.src = event.target.result;
     }
+    currentImgName = e.target.files[0].name;
     reader.readAsDataURL(e.target.files[0]);
 }
 
-const purpleButton = document.getElementById('purpleButton');
-purpleButton.addEventListener('click', ()=>{curColor = colorPurple;});
+const colorButtons = document.getElementsByClassName('colorButton');
+Array.prototype.forEach.call(colorButtons, (button) =>{
+  button.addEventListener('click', changeColor, false);
+});
 
-const yellowButton = document.getElementById('yellowButton');
-yellowButton.addEventListener('click', ()=>{curColor = colorYellow;});
+function changeColor(e){
+  curColor = eval(e.currentTarget.id);
+  document.getElementById("currentColorButton").setAttribute(`style`, `color:${curColor};`);
+}
 
-const greenButton = document.getElementById('greenButton');
-greenButton.addEventListener('click', ()=>{curColor = colorGreen;});
+const instruxButton = document.getElementById('instruxButton');
+instruxButton.addEventListener('click', loadInstrux, false);
 
-const redButton = document.getElementById('redButton');
-redButton.addEventListener('click', ()=>{curColor = colorRed;});
+function loadInstrux(){
+  document.getElementById("instrux").classList.add('instruxLoad');
+}
 
-const blueButton = document.getElementById('blueButton');
-blueButton.addEventListener('click', ()=>{curColor = colorBlue;});
+const instrux = document.getElementById('instrux');
+instrux.addEventListener('click', unloadInstrux, false);
 
-const cyanButton = document.getElementById('cyanButton');
-cyanButton.addEventListener('click', ()=>{curColor = colorCyan;});
-
-const whiteButton = document.getElementById('whiteButton');
-whiteButton.addEventListener('click', ()=>{curColor = colorWhite;});
-
-const blackButton = document.getElementById('blackButton');
-blackButton.addEventListener('click', ()=>{curColor = colorBlack;});
+function unloadInstrux(){
+  $("#instrux").removeClass('instruxLoad');
+}
 
 $(canvasEl).mousedown(function(e){
   let mouseX = e.pageX - this.offsetLeft + 12;
   let mouseY = e.pageY - this.offsetTop + 12;
 
   paint = true;
-  // addClick(e.pageX - this.offsetLeft + 12, e.pageY - this.offsetTop + 12);
   addClick(mouseX, mouseY);
   redraw();
 });
@@ -244,7 +255,6 @@ $(canvasEl).mousemove(function(e){
   let mouseY = e.pageY - this.offsetTop + 12;
 
   if(paint){
-    // addClick(e.pageX - this.offsetLeft + 12, e.pageY - this.offsetTop + 12, true);
     addClick(mouseX, mouseY, true);
     redraw();
   }
@@ -281,6 +291,7 @@ const colorWhite = "rgba(255,255,255,.5)";
 const colorBlack = "rgba(0,0,0,.5)";
 
 let curColor = colorRed;
+document.getElementById("currentColorButton").setAttribute(`style`, `color:${curColor};`);
 let clickColor = new Array();
 
 const clearImgButton = document.getElementById('clearImgButton');
@@ -291,6 +302,10 @@ clearPaintButton.addEventListener('click', clearPaint);
 
 function clearImg(){
   currentImg = undefined;
+  currentImgName = '(none)';
+  setImageName();
+  sampleImgSelect = [false, false, false, false];
+  setSampleImgNumber();
   redraw();
 }
 
@@ -328,14 +343,90 @@ function redraw(){
   }
 }
 
-let SampleRGB1 = document.getElementById("Hum_RGB_1");
-let SampleRGB2 = document.getElementById("Hum_RGB_2");
-let SampleRGB3 = document.getElementById("Hum_RGB_3");
-let SampleRGB4 = document.getElementById("Hum_RGB_4");
+let sampleRGB1 = document.getElementById("Hum_RGB_1");
+let sampleRGB2 = document.getElementById("Hum_RGB_2");
+let sampleRGB3 = document.getElementById("Hum_RGB_3");
+let sampleRGB4 = document.getElementById("Hum_RGB_4");
 
-// meow
-// default image. doesn't work locally.
-SampleRGB1.onload = function(){
-  currentImg = SampleRGB1;
-  redraw();
+let sampleImgSelect = [false, false, false, false];
+
+loadDefaultImage = function(){
+    let pickedImg;
+    let rand = Math.floor((Math.random() * 4) + 1);
+    switch (rand){
+      case 1:
+        pickedImg = sampleRGB1;
+        currentImgName = 'Hum_RGB_1.png';
+        sampleImgSelect[0] = true;
+        break;
+      case 2:
+        pickedImg = sampleRGB2;
+        currentImgName = 'Hum_RGB_2.png';
+        sampleImgSelect[1] = true;
+        break;
+      case 3:
+        pickedImg = sampleRGB3;
+        currentImgName = 'Hum_RGB_3.png';
+        sampleImgSelect[2] = true;
+        break;
+      case 4:
+        pickedImg = sampleRGB4;
+        currentImgName = 'Hum_RGB_4.png';
+        sampleImgSelect[3] = true;
+        break;
+      default:
+        pickedImg = sampleRGB1;
+        currentImgName = 'Hum_RGB_1.png';
+        sampleImgSelect[0] = true;
+        break;
+    }
+    pickedImg.onload = function(){
+      currentImg = pickedImg;
+      setImageName();
+      setSampleImgNumber();
+      redraw();
+    }
+}
+
+// requires server!
+loadDefaultImage();
+
+const sampleImgNumbers = document.getElementsByClassName('sampleImgNumber');
+
+function readySampleImgNumbers(){
+  Array.prototype.forEach.call(sampleImgNumbers, (imgNumber) => {
+    imgNumber.addEventListener('click', (e) => {
+      sampleImgSelect = [false, false, false, false];
+      currentImg = eval(e.currentTarget.id);
+      let n = parseInt(e.currentTarget.attributes.data.value);
+      sampleImgSelect[n] = true;
+      currentImgName = currentImg.src.split(/(\\|\/)/g).pop();
+      setSampleImgNumber();
+      setImageName();
+      redraw();
+    });
+  });
+}
+
+readySampleImgNumbers();
+
+function setSampleImgNumber(){
+  Array.prototype.forEach.call(sampleImgNumbers, (imgNumber) =>{
+    let n = parseInt(imgNumber.attributes.data.value);
+    if(sampleImgSelect[n] === true){
+      imgNumber.setAttribute(`style`, `color:white;`);
+    } else {
+      imgNumber.setAttribute(`style`, `color:default;`);
+    }
+  });
+}
+
+function setImageName(){
+  document.getElementById("imageName").innerHTML = currentImgName;
+}
+
+function setAudioNames(){
+  document.getElementById("redAudioName").innerHTML = audioNames['audio1'];
+  document.getElementById("greenAudioName").innerHTML = audioNames['audio2'];
+  document.getElementById("blueAudioName").innerHTML = audioNames['audio3'];
 }

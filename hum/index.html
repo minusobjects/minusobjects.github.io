@@ -1,132 +1,204 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Will it work?</title>
+    <title>Hum</title>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow|PT+Sans|PT+Sans:700|Average+Sans|Crimson+Text|Amiri">
+    </link>
     <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
-    <style>
-      html, body, canvas {
-        padding: 0px;
-        margin: 0px;
-      }
-      body {
-        background-color: #444;
-      }
-      li {
-        padding-left: 6px;
-        height:40px;
-        font-size:40px;
-      }
-    </style>
+    <link rel="stylesheet" href="./main.css">
+    <style></style>
   </head>
 
   <!-- <canvas id="canvasTwo" width="1000px" height="600px"  style="position:absolute; z-index:20; cursor: url(defaults/circle.png), auto;"></canvas> -->
 
   <body>
-    <div id="main" style="width:1000px; margin: 0 auto; margin-top: 30px;">
-      <canvas id="canvas" width="1000px" height="600px" style="position:absolute; background-color:black; z-index:10; cursor: url(defaults/circle.png), auto;"></canvas>
-      <div id="bar" style="position:absolute; background-color: rgba(255,255,255,.5); position: absolute; width:2px; height:600px; z-index:30; margin-left:0px; cursor: url(defaults/circle.png), auto; display:none;"></div>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/>
-    <div id="bottom" style="background: linear-gradient(#bbab8e,bisque);">
-    <ul style="display:flex; list-style:none;">
+    <div class="instrux" id="instrux">
+      <div class="innerInstrux">
+        <h3>Hum is a color-based music/audio mixer.</h3>
+        <br/>
+        Change the volume of the three audio tracks via the amounts of red, green and blue (respectively) in the central image (on a computer screen, all images are made-up of red, green and blue).
+        <br/><br/>
+        Click the file buttons to load your own audio and image files.
+        <br/><br/>
+        Add color by selecting from the palette and then clicking on the canvas.
+        <br/><br/>
+        Remember: the audio will stop at the end of the shortest track.
+        <br/><br/> <br/><br/>
+        Hum was made by Michael Newton in May, 2017.
+        <br/><br/>
+        (link) (link) (link)
+        <br/><br/>
+      </div>
+    </div>
+    <div id="main" class="mainDiv">
+      <canvas id="canvas" width="1000px" height="600px" class="canvasOne"></canvas>
+      <div id="bar" class="bar"></div>
+    <br/><br/>
+  </div>
+    <div id="bottom" class="bottomDiv">
+      <div class="bottomCenter">
+    <ul class="topButtons">
       <li>
-      <a id='colorInfoButton'><i class="fa fa-play-circle-o" style="color:#555"></i></a>
+      <a class="grayButton button" id='colorInfoButton'><i class="fa fa-play-circle-o"></i></a>
       </li>
 
       <li>
-      <a id='pauseButton'><i class="fa fa-pause-circle-o" style="color:#555"></i></a>
+      <a class="grayButton button" id='pauseButton'><i class="fa fa-pause-circle-o"></i></a>
       </li>
 
       <li>
-      <a id='stopIntervalButton'><i class="fa fa-stop-circle-o" style="color:#555"></i></a>
+      <a class="grayButton button" id='stopIntervalButton'><i class="fa fa-stop-circle-o"></i></a>
+      </li>
+
+      <li>
+        <div class="pipeDiv">|</div>
       </li>
 
       <li>
         <label>
-          <i class="fa fa-file-image-o" style="color:#555"></i>
+          <i class="fa fa-file-image-o grayButton button"></i>
           <input type="file" id="imageLoader" name="imageLoader" style="display:none;"/>
         </label>
       </li>
 
       <li>
         <label>
-          <i class="fa fa-file-audio-o" style="color:red"></i>
+          <i class="fa fa-file-audio-o button" style="color:red"></i>
           <input type="file" class="audioLoader" id="audio1" name="audioLoader1" style="display:none;"/>
         </label>
       </li>
 
       <li>
         <label>
-          <i class="fa fa-file-audio-o" style="color:green"></i>
+          <i class="fa fa-file-audio-o button" style="color:green"></i>
           <input type="file" class="audioLoader" id="audio2" name="audioLoader2" style="display:none;"/>
         </label>
       </li>
 
       <li>
         <label>
-          <i class="fa fa-file-audio-o" style="color:blue"></i>
+          <i class="fa fa-file-audio-o button" style="color:blue"></i>
           <input type="file" class="audioLoader" id="audio3" name="audioLoader3" style="display:none;"/>
         </label>
       </li>
 
       <li>
-      <a id='currentColorButton'><i class="fa fa-circle" style="color:pink"></i></a>
+        <div class="pipeDiv">|</div>
       </li>
 
       <li>
-      <a id='purpleButton'><i class="fa fa-dot-circle-o" style="color:purple"></i></a>
+      <a class="currentColorButton" id='currentColorButton'><i class="fa fa-circle"></i></a>
       </li>
 
       <li>
-      <a id='greenButton'><i class="fa fa-dot-circle-o" style="color:green"></i></a>
+      <a class='colorButton button' id='colorPurple'><i class="fa fa-dot-circle-o" style="color:purple"></i></a>
       </li>
 
       <li>
-      <a id='yellowButton'><i class="fa fa-dot-circle-o" style="color:yellow"></i></a>
+      <a class='colorButton button' id='colorGreen'><i class="fa fa-dot-circle-o" style="color:green"></i></a>
       </li>
 
       <li>
-      <a id='redButton'><i class="fa fa-dot-circle-o" style="color:red"></i></a>
+      <a class='colorButton button' id='colorYellow'><i class="fa fa-dot-circle-o" style="color:yellow"></i></a>
       </li>
 
       <li>
-      <a id='blueButton'><i class="fa fa-dot-circle-o" style="color:blue"></i></a>
+      <a class='colorButton button' id='colorRed'><i class="fa fa-dot-circle-o" style="color:red"></i></a>
       </li>
 
       <li>
-      <a id='cyanButton'><i class="fa fa-dot-circle-o" style="color:cyan"></i></a>
+      <a class='colorButton button' id='colorBlue'><i class="fa fa-dot-circle-o" style="color:blue"></i></a>
       </li>
 
       <li>
-      <a id='whiteButton'><i class="fa fa-dot-circle-o" style="color:white"></i></a>
+      <a class='colorButton button' id='colorCyan'><i class="fa fa-dot-circle-o" style="color:cyan"></i></a>
       </li>
 
       <li>
-      <a id='blackButton'><i class="fa fa-dot-circle-o" style="color:black"></i></a>
+      <a class='colorButton button' id='colorWhite'><i class="fa fa-dot-circle-o" style="color:white"></i></a>
       </li>
 
+      <li>
+      <a class='colorButton button' id='colorBlack'><i class="fa fa-dot-circle-o" style="color:black"></i></a>
+      </li>
+
+      <li>
+        <div class="pipeDiv">|</div>
+      </li>
+
+      <li>
+        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB1' data=0>1</a></div>
+      </li>
+
+      <li>
+        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB2' data=1>2</a></div>
+      </li>
+
+      <li>
+        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB3' data=2>3</a></div>
+      </li>
+
+      <li>
+        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB4' data=3>4</a></div>
+      </li>
+
+      <li>
+        <div class="pipeDiv">|</div>
+      </li>
+
+      <li>
+      <a class="button grayButton" id='instruxButton'><i class="fa fa-question-circle-o"></i></a>
+      </li>
     </ul>
-    <br/><br/>
-    <ul style="display:flex; list-style:none; font-family: 'Univers', 'Arial', sans-serif;">
-      <li>
-      <a id='clearImgButton'>CLEAR IMAGE</a>
+    <br/>
+    <ul class="bottomButtons">
+      <li class="fileList">
+        <div id='imageName'>
+          Current image
+        </div>
+        <div id='redAudioName' style="color:red;">
+          Current red
+        </div>
+        <div id='greenAudioName' style="color:green;">
+          Current green
+        </div>
+        <div id='blueAudioName' style="color:blue;">
+          Current blue
+        </div>
       </li>
-      <li>
-      <a id='clearPaintButton'>CLEAR PAINT</a>
+      <li class="volList">
+        <div id='redVol' style="background-color:rgba(255,0,0,0); color:red;">
+          R
+        </div>
+        <div id='greenVol' style="background-color:rgba(0,255,0,0); color:green;">
+          G
+        </div>
+        <div id='blueVol' style="background-color:rgba(0,0,255,0); color:blue;">
+          B
+        </div>
       </li>
-      <li>
-      <div id='volumeTest'>
-        Red Volume?
-      </div>
+      <li class="clearList">
+        <div>
+          <a id='clearImgButton'>CLEAR IMAGE</a>
+        </div>
+        <div>
+          <a id='clearPaintButton'>CLEAR PAINT</a>
+        </div>
+      </li>
+      <li class="title">
+        <div>
+          HUM
+        </div>
       </li>
     </ul>
   </div>
-    <!-- note that this does work to load an img in -->
-    <img src="defaults/Hum_RGB_1.png" style="display:none;" id="Hum_RGB_1"/>
-    <img src="defaults/Hum_RGB_2.png" style="display:none;" id="Hum_RGB_2"/>
-    <img src="defaults/Hum_RGB_3.png" style="display:none;" id="Hum_RGB_3"/>
-    <img src="defaults/Hum_RGB_4.png" style="display:none;" id="Hum_RGB_4"/>
+  </div>
+
+  <img src="defaults/Hum_RGB_1.png" style="display:none;" id="Hum_RGB_1"/>
+  <img src="defaults/Hum_RGB_2.png" style="display:none;" id="Hum_RGB_2"/>
+  <img src="defaults/Hum_RGB_3.png" style="display:none;" id="Hum_RGB_3"/>
+  <img src="defaults/Hum_RGB_4.png" style="display:none;" id="Hum_RGB_4"/>
   </div>
   <script src="jquery-3.2.1.min.js"></script>
   <script src="howler-dist/howler.js"></script>
