@@ -66,7 +66,18 @@ function colorTimeline(){
           stopInterval();
         }
     }
+    setPauseButton();
     playAll();
+}
+
+function setPauseButton(){
+  document.getElementById("pauseDiv").setAttribute(`style`, `display:block;`);
+  document.getElementById("playDiv").setAttribute(`style`, `display:none;`);
+}
+
+function setPlayButton(){
+  document.getElementById("pauseDiv").setAttribute(`style`, `display:none;`);
+  document.getElementById("playDiv").setAttribute(`style`, `display:block;`);
 }
 
 let pixelInfo;
@@ -107,6 +118,7 @@ function stopInterval(){
   bar.style.display = `none`;
   redraw();
   current_x = 0;
+  setPlayButton()
 }
 
 const audioLoaders = document.getElementsByClassName('audioLoader');
@@ -120,6 +132,7 @@ pauseButton.addEventListener('click', pauseInterval, false);
 function pauseInterval(){
   pauseAll();
   window.clearInterval(setInt);
+  setPlayButton();
 }
 
 function playAll(){
@@ -391,4 +404,8 @@ function setAudioNames(){
   document.getElementById("redAudioName").innerHTML = audioNames['audio1'];
   document.getElementById("greenAudioName").innerHTML = audioNames['audio2'];
   document.getElementById("blueAudioName").innerHTML = audioNames['audio3'];
+}
+
+window.onload = function(){
+  setTimeout(loadInstrux, 1000);
 }
