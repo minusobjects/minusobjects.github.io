@@ -111,13 +111,31 @@ function getColorInfo(x_coord){
     blueSum = blueSum + pixelInfo.data[i+2];
   }
 
-  soundObj['audio1'].volume(redSum/halfMax);
-  soundObj['audio2'].volume(greenSum/halfMax);
-  soundObj['audio3'].volume(blueSum/halfMax);
+  if(redSum/halfMax >= 1){
+    redSum = 1;
+  } else {
+    redSum = redSum/halfMax;
+  }
 
-  document.getElementById("redVolCircle").setAttribute(`fill`, `rgba(255,0,0,${redSum/halfMax})`);
-  document.getElementById("greenVolCircle").setAttribute(`fill`, `rgba(0,255,0,${greenSum/halfMax})`);
-  document.getElementById("blueVolCircle").setAttribute(`fill`, `rgba(0,0,255,${blueSum/halfMax})`);
+  if(greenSum/halfMax >= 1){
+    greenSum = 1;
+  } else {
+    greenSum = greenSum/halfMax;
+  }
+
+  if(blueSum/halfMax >= 1){
+    blueSum = 1;
+  } else {
+    blueSum = blueSum/halfMax;
+  }
+
+  soundObj['audio1'].volume(redSum);
+  soundObj['audio2'].volume(greenSum);
+  soundObj['audio3'].volume(blueSum);
+
+  document.getElementById("redVolCircle").setAttribute(`fill`, `rgba(255,0,0,${redSum})`);
+  document.getElementById("greenVolCircle").setAttribute(`fill`, `rgba(0,255,0,${greenSum})`);
+  document.getElementById("blueVolCircle").setAttribute(`fill`, `rgba(0,0,255,${blueSum})`);
 }
 
 const stopIntervalButton = document.getElementById('stopIntervalButton');
@@ -474,7 +492,7 @@ function setAudioNames(){
 
 
 // requires server
-loadDefaultImage();
+// loadDefaultImage();
 
 window.onload = function(){
   readySampleImgNumbers();
