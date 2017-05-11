@@ -5,7 +5,7 @@ const allHintButtons = [clearImgButton, clearPaintButton, colorButtons,
 currentColorButton, stopIntervalButton, colorInfoButton,
 '#audio1Button', '#audio2Button', '#audio3Button',
 '#imageLoaderButton', '#redVol', '#greenVol', '#blueVol',
-sampleImgNumbers, '#imageName', '#redAudioName', '#greenAudioName',
+sampleImgNumbers, sampleAudNumbers, '#imageName', '#redAudioName', '#greenAudioName',
 '#blueAudioName', instruxButton, '#sampleImgStatic', '#sampleAudStatic'];
 
 const toggleTipsButton = document.getElementById('toggleTipsButton');
@@ -126,6 +126,13 @@ $('#sampleImgStatic').tooltip({
   },
   show: { duration: 300 },
   content: "Load one of the sample images into the background."
+});
+$(sampleAudNumbers).tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { duration: 300 },
+  content: "Load one of the sample sets of audio files."
 });
 $('#sampleAudStatic').tooltip({
   classes: {

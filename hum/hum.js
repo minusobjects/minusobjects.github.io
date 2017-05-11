@@ -48,6 +48,7 @@ function loadSampleHowls(num){
   sampleAudSelect = [false,false,false,false];
   sampleAudSelect[num] = true;
   setSampleAudNumber();
+  setAudioNames();
 }
 
 let setInt;
@@ -471,9 +472,9 @@ function setAudioNames(){
   document.getElementById("blueAudioName").innerHTML = audioNames['audio3'];
 }
 
-// meow
-// requires server!
-// loadDefaultImage();
+
+// requires server
+loadDefaultImage();
 
 window.onload = function(){
   readySampleImgNumbers();
@@ -481,6 +482,5 @@ window.onload = function(){
   loadSampleHowls(0);
   setAudioNames();
   setHints();
-  // meow
-  // setTimeout(loadInstrux, 500);
+  setTimeout(loadInstrux, 500);
 }
