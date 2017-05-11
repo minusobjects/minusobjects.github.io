@@ -492,7 +492,7 @@ function setAudioNames(){
 
 
 // requires server
-// loadDefaultImage();
+loadDefaultImage();
 
 window.onload = function(){
   readySampleImgNumbers();
