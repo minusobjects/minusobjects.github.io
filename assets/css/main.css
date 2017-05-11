@@ -2999,7 +2999,8 @@
 		}
 
 		.wrapper.style1 {
-			background-color: #5e42a6;
+			/*background-color: #5e42a6;*/
+			background-color: #210633;
 		}
 
 		.wrapper.style1-alt {
@@ -3127,7 +3128,8 @@
 		display: -webkit-flex;
 		display: -ms-flex;
 		display: flex;
-		background-color: #5e42a6;
+		/*background-color: #5e42a6;*/
+		background-color: #210633;
 		cursor: default;
 		padding: 1.75em 2em;
 	}
