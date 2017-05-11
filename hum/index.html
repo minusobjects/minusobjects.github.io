@@ -6,7 +6,11 @@
           href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow|PT+Sans|PT+Sans:700|Average+Sans|Crimson+Text|Amiri">
     </link>
     <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./css/main.css">
+
+    <link rel="stylesheet" href="./css/jquery-ui.min.css">
+    <link rel="stylesheet" href="./css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="./css/jquery-ui.theme.min.css">
     <style></style>
   </head>
 
@@ -17,21 +21,26 @@
       <div class="innerInstrux">
         <h3>Hum is a color-based music/audio mixer.</h3>
         <br/>
-        Change the volume of the three audio tracks via the amounts of red, green and blue (respectively) in the central image (note: on a computer screen, all images are made-up of red, green and blue).
+        There are three audio files: one for <span style="color:red">red,</span> one for <span style="color:green">green</span> and one for <span style="color:blue">blue.</span>
         <br/><br/>
-        Click the file buttons to load your own audio and image files.
+        When you play the audio, the levels of the three audio tracks will change based on the amounts of <span style="color:red">red,</span> <span style="color:green">green</span> and <span style="color:blue">blue</span> (respectively) in the central canvas (note: on a computer screen, all images are made-up of <span style="color:red">red,</span> <span style="color:green">green</span> and <span style="color:blue">blue</span>).
         <br/><br/>
-        Add color by selecting from the palette and then clicking on the canvas.
+        Click the file buttons to load your own audio files and/or background image. Or, just use the preloaded samples.
         <br/><br/>
-        Remember: the audio will stop at the end of the shortest track.
+        Add color by selecting from the palette and then 'painting' on the canvas.
+        <br/><br/>
+        The audio will stop at the end of the shortest of the three tracks.
+        <br/><br/>
+        Hover over the buttons/icons for hints.
         <br/><br/></br>
         Hum was made by Michael Newton in May, 2017.
-        <br/><br/>
-        (link tk) (link tk) (link tk)
+        <br/>
+        Learn more about me here: <a href="https://minusobjects.github.io/">portfolio</a> | <a href="https://github.com/minusobjects">github</a> | <a href="https://www.linkedin.com/in/michael-newton-976588140/">linkedin</a>
         <br/><br/>
       </div>
     </div>
     <div id="main" class="mainDiv">
+    <div id="canvasDiv" class="canvasDiv">
       <canvas id="canvas" width="1000px" height="600px" class="canvasOne"></canvas>
       <div id="bar" class="bar"></div>
     <br/><br/>
@@ -40,166 +49,250 @@
       <div class="bottomCenter">
     <ul class="topButtons">
       <li>
-      <div id="playDiv" class="playDiv" style="display:block"><a class="grayButton button" id='colorInfoButton'><i class="fa fa-play-circle-o"></i></a></div>
-      <div id="pauseDiv" class="pauseDiv" style="display:none"><a class="grayButton button" id='pauseButton'><i class="fa fa-pause-circle-o"></i></a></div>
+      <div id="playDiv" class="playDiv" style="display:block"><a class="grayButton button" id='colorInfoButton' title="colorInfoButton"><i class="fa fa-play-circle-o"></i></a></div>
+      <div id="pauseDiv" class="pauseDiv" style="display:none"><a class="grayButton button" id='pauseButton' title="pauseButton"><i class="fa fa-pause-circle-o"></i></a></div>
       </li>
 
       <li>
-      <a class="grayButton button" id='stopIntervalButton'><i class="fa fa-stop-circle-o"></i></a>
+      <a class="grayButton button" id='stopIntervalButton' title="stopIntervalButton"><i class="fa fa-stop-circle-o"></i></a>
       </li>
 
       <li>
-        <div class="pipeDiv">|</div>
+        <div class="pipeDiv"></div>
       </li>
 
       <li>
         <label>
-          <i class="fa fa-file-image-o grayButton button"></i>
+          <i id="imageLoaderButton" title="imageLoaderButton" class="fa fa-file-image-o grayButton button"></i>
           <input type="file" id="imageLoader" name="imageLoader" style="display:none;"/>
         </label>
       </li>
 
       <li>
         <label>
-          <i class="fa fa-file-audio-o button" style="color:red"></i>
+          <i id="audio1Button" title="audio1Button" class="fa fa-file-audio-o button audioLoaderButton" style="color:red"></i>
           <input type="file" class="audioLoader" id="audio1" name="audioLoader1" style="display:none;"/>
         </label>
       </li>
 
       <li>
         <label>
-          <i class="fa fa-file-audio-o button" style="color:green"></i>
+          <i id="audio2Button" title="audio2Button" class="fa fa-file-audio-o button audioLoaderButton" style="color:green"></i>
           <input type="file" class="audioLoader" id="audio2" name="audioLoader2" style="display:none;"/>
         </label>
       </li>
 
       <li>
         <label>
-          <i class="fa fa-file-audio-o button" style="color:blue"></i>
+          <i id="audio3Button" title="audio3Button" class="fa fa-file-audio-o button audioLoaderButton" style="color:blue"></i>
           <input type="file" class="audioLoader" id="audio3" name="audioLoader3" style="display:none;"/>
         </label>
       </li>
 
       <li>
-        <div class="pipeDiv">|</div>
+        <div class="pipeDiv"></div>
       </li>
 
       <li>
-      <a class="currentColorButton" id='currentColorButton'><i class="fa fa-circle"></i></a>
+        <div id='redVol' title='redVol' style="background-color:rgba(255,0,0,0); color:red; padding-top:4px;">
+          <svg height="26px" width="26px">
+            <circle id='redVolCircle' cx="13" cy="13" r="12" stroke="red" stroke-width="1px" fill="none" />
+          </svg>
+        </div>
+      </li>
+      <li>
+        <div id='greenVol' title='greenVol' style="background-color:rgba(0,255,0,0); color:green; padding-top:4px;">
+          <svg height="26px" width="26px">
+            <circle id='greenVolCircle' cx="13" cy="13" r="12" stroke="green" stroke-width="1px" fill="none" />
+          </svg>
+        </div>
+      </li>
+      <li>
+        <div id='blueVol' title='blueVol' style="background-color:rgba(0,0,255,0); color:blue; padding-top:4px;">
+          <svg height="26px" width="26px">
+            <circle id='blueVolCircle' cx="13" cy="13" r="12" stroke="blue" stroke-width="1px" fill="none" />
+          </svg>
+        </div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorPurple'><i class="fa fa-dot-circle-o" style="color:purple"></i></a>
+        <div class="pipeDiv"></div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorGreen'><i class="fa fa-dot-circle-o" style="color:green"></i></a>
+      <a class="currentColorButton" id='currentColorButton' title="currentColorButton"><i class="fa fa-circle"></i></a>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorYellow'><i class="fa fa-dot-circle-o" style="color:yellow"></i></a>
+        <div class='colorButton' id='colorRed' title='colorRed' style="background-color:red"></div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorRed'><i class="fa fa-dot-circle-o" style="color:red"></i></a>
+        <div class='colorButton' id='colorYellow' title='colorYellow' style="background-color:yellow"></div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorBlue'><i class="fa fa-dot-circle-o" style="color:blue"></i></a>
+        <div class='colorButton' id='colorGreen' title='colorGreen' style="background-color:green"></div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorCyan'><i class="fa fa-dot-circle-o" style="color:cyan"></i></a>
+        <div class='colorButton' id='colorCyan' title='colorCyan' style="background-color:cyan"></div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorWhite'><i class="fa fa-dot-circle-o" style="color:white"></i></a>
+        <div class='colorButton' id='colorBlue' title='colorBlue' style="background-color:blue"></div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorBlack'><i class="fa fa-dot-circle-o" style="color:black"></i></a>
+        <div class='colorButton' id='colorPurple' title='colorPurple' style="background-color:purple"></div>
       </li>
 
       <li>
-        <div class="pipeDiv">|</div>
+        <div class='colorButton' id='colorWhite' title='colorWhite' style="background-color:white"></div>
       </li>
 
       <li>
-        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB1' data=0>1</a></div>
+        <div class='colorButton' id='colorBlack' title='colorBlack' style="background-color:black"></div>
       </li>
 
       <li>
-        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB2' data=1>2</a></div>
+        <div class="pipeDiv"></div>
       </li>
 
       <li>
-        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB3' data=2>3</a></div>
+        <a class="button grayButton" id='instruxButton' title='instruxButton'><i class="fa fa-question-circle-o"></i></a>
       </li>
 
       <li>
-        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB4' data=3>4</a></div>
-      </li>
-
-      <li>
-        <div class="pipeDiv">|</div>
-      </li>
-
-      <li>
-      <a class="button grayButton" id='instruxButton'><i class="fa fa-question-circle-o"></i></a>
+        <div class="wordButton" style="min-width:120px;">
+          <a id='toggleTipsButton' title="toggleTipsButton">TURN HINTS OFF</a>
+        </div>
       </li>
     </ul>
-    <br/>
-    <ul class="bottomButtons">
-      <li class="fileList">
-        <div id='imageName'>
-          Current image
+    <ul class="middleButtons">
+
+      <li>
+        <i class="fa fa-file-image-o staticButton" title="sampleImgStatic" id="sampleImgStatic"></i>
+      </li>
+
+      <li>
+        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB1' title='sampleRGB1' data=0>1</a></div>
+      </li>
+
+      <li>
+        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB2' title='sampleRGB2' data=1>2</a></div>
+      </li>
+
+      <li>
+        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB3' title='sampleRGB3' data=2>3</a></div>
+      </li>
+
+      <li>
+        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB4' title='sampleRGB4' data=3>4</a></div>
+      </li>
+
+      <li>
+        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB5' title='sampleRGB5' data=4>5</a></div>
+      </li>
+
+      <li>
+        <div class="pipeDiv"></div>
+      </li>
+
+      <li>
+        <i class="fa fa-file-audio-o staticButton" title="sampleAudStatic" id="sampleAudStatic"></i>
+      </li>
+
+      <li>
+        <div class="textButton"><a class='sampleAudNumber' id='sampleAud1' title='sampleAud1' data=0>1</a></div>
+      </li>
+
+      <li>
+        <div class="textButton"><a class='sampleAudNumber' id='sampleAud2' title='sampleAud2' data=1>2</a></div>
+      </li>
+
+      <li>
+        <div class="textButton"><a class='sampleAudNumber' id='sampleAud3' title='sampleAud3' data=2>3</a></div>
+      </li>
+
+      <li>
+        <div class="textButton"><a class='sampleAudNumber' id='sampleAud4' title='sampleAud4' data=3>4</a></div>
+      </li>
+
+      <li>
+        <div class="pipeDiv"></div>
+      </li>
+
+      <li>
+        <div class="wordButton" style="min-width:120px;">
+          <a id='clearImgButton' title="clearImgButton">CLEAR IMAGE</a>
         </div>
-        <div id='redAudioName' style="color:red;">
+      </li>
+      <li>
+        <div class="wordButton" style="min-width:120px;">
+          <a id='clearPaintButton' title="clearPaintButton">CLEAR PAINT</a>
+        </div>
+      </li>
+
+      <li>
+        <div style="background:transparent;width:200px;"></div>
+      </li>
+
+    </ul>
+    <div class="HRdiv">
+      <hr class="middleHR">
+    </div>
+    <div class="bottomButtons">
+    <table class="filesTable" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+        <div id='imageName' title='imageName' class='nameDiv td-top' style="color:#777;">
+          (none)
+        </div>
+      </td>
+      <td>
+        <div id='redAudioName' title='redAudioName' class='nameDiv td-top td-right' style="color:red;">
           Current red
         </div>
-        <div id='greenAudioName' style="color:green;">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id='greenAudioName' title='greenAudioName' class='nameDiv' style="color:green;">
           Current green
         </div>
-        <div id='blueAudioName' style="color:blue;">
+      </td>
+      <td>
+        <div id='blueAudioName' title='blueAudioName' class='nameDiv td-right' style="color:blue;">
           Current blue
         </div>
-      </li>
-      <li class="volList">
-        <div id='redVol' style="background-color:rgba(255,0,0,0); color:red;">
-          R
-        </div>
-        <div id='greenVol' style="background-color:rgba(0,255,0,0); color:green;">
-          G
-        </div>
-        <div id='blueVol' style="background-color:rgba(0,0,255,0); color:blue;">
-          B
-        </div>
-      </li>
-      <li class="clearList">
-        <div>
-          <a id='clearImgButton'>CLEAR IMAGE</a>
-        </div>
-        <div>
-          <a id='clearPaintButton'>CLEAR PAINT</a>
-        </div>
-      </li>
-      <li class="title">
-        <div>
-          HUM
-        </div>
-      </li>
-    </ul>
+      </td>
+    </tr>
+  </table>
+  <div id="errors" class="errorsDiv">
+
   </div>
   </div>
+    <div class="titleDiv">
+    </div>
+    <div class="borderDiv">
+    </div>
+
+  </div><!-- end bottomCenter -->
+  </div><!-- end bottom -->
+</div><!-- end main -->
 
   <img src="defaults/Hum_RGB_1.png" style="display:none;" id="Hum_RGB_1"/>
   <img src="defaults/Hum_RGB_2.png" style="display:none;" id="Hum_RGB_2"/>
   <img src="defaults/Hum_RGB_3.png" style="display:none;" id="Hum_RGB_3"/>
   <img src="defaults/Hum_RGB_4.png" style="display:none;" id="Hum_RGB_4"/>
+  <img src="defaults/Hum_RGB_5.png" style="display:none;" id="Hum_RGB_5"/>
   </div>
   <script src="jquery-3.2.1.min.js"></script>
+  <script src="jquery-ui.min.js"></script>
   <script src="howler-dist/howler.js"></script>
   <script src="hum.js"></script>
+  <script src="tooltips.js"></script>
   <!-- <script src="test_paint_2.js"></script> -->
   </body>
 </html>

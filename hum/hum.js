@@ -8,37 +8,47 @@ const ctx = canvasEl.getContext('2d');
 
 const bar = document.getElementById("bar");
 
-// load default audio - seems to work fine with multiple files
-// BUT having CORS errors locally...
-let defaultHowl1 = new Howl({
-  preload: true,
-  volume: 0,
-  src: 'defaults/Red_sample.wav',
-});
-
-let defaultHowl2 = new Howl({
-  preload: true,
-  volume: 0,
-  src: 'defaults/Green_sample.wav',
-});
-
-let defaultHowl3 = new Howl({
-  preload: true,
-  volume: 0,
-  src: 'defaults/Blue_sample.wav',
-});
-
 let soundObj = {};
-soundObj['audio1'] = defaultHowl1;
-soundObj['audio2'] = defaultHowl2;
-soundObj['audio3'] = defaultHowl3;
-
 let audioNames = {};
-audioNames['audio1'] = 'Red_sample.wav';
-audioNames['audio2'] = 'Green_sample.wav';
-audioNames['audio3'] = 'Blue_sample.wav';
 
-setAudioNames();
+function loadSampleHowls(num){
+  const sampleHowls = {
+    0:['Tone_Red.mp3','Tone_Green.mp3','Tone_Blue.mp3'],
+    1:['Beat_Red.mp3','Beat_Green.mp3','Beat_Blue.mp3'],
+    2:['Jazz_Red.mp3','Jazz_Green.mp3','Jazz_Blue.mp3'],
+    3:['Choir_Red.mp3','Choir_Green.mp3','Choir_Blue.mp3']
+  };
+
+  let defaultHowl1 = new Howl({
+    preload: true,
+    volume: 0,
+    src: `defaults/${sampleHowls[num][0]}`
+  });
+
+  let defaultHowl2 = new Howl({
+    preload: true,
+    volume: 0,
+    src: `defaults/${sampleHowls[num][1]}`
+  });
+
+  let defaultHowl3 = new Howl({
+    preload: true,
+    volume: 0,
+    src: `defaults/${sampleHowls[num][2]}`
+  });
+
+  soundObj['audio1'] = defaultHowl1;
+  soundObj['audio2'] = defaultHowl2;
+  soundObj['audio3'] = defaultHowl3;
+
+  audioNames['audio1'] = sampleHowls[num][0];
+  audioNames['audio2'] = sampleHowls[num][1];
+  audioNames['audio3'] = sampleHowls[num][2];
+
+  sampleAudSelect = [false,false,false,false];
+  sampleAudSelect[num] = true;
+  setSampleAudNumber();
+}
 
 let setInt;
 let current_x = 0;
@@ -86,6 +96,7 @@ let greenSum;
 let blueSum;
 let alphaSum;
 let max = canvasEl.height * 255;
+let halfMax = max / 2;
 
 function getColorInfo(x_coord){
   pixelInfo = ctx.getImageData(x_coord+2,0,1,canvasEl.height);
@@ -99,13 +110,13 @@ function getColorInfo(x_coord){
     blueSum = blueSum + pixelInfo.data[i+2];
   }
 
-  soundObj['audio1'].volume(redSum/max);
-  soundObj['audio2'].volume(greenSum/max);
-  soundObj['audio3'].volume(blueSum/max);
+  soundObj['audio1'].volume(redSum/halfMax);
+  soundObj['audio2'].volume(greenSum/halfMax);
+  soundObj['audio3'].volume(blueSum/halfMax);
 
-  document.getElementById("redVol").setAttribute(`style`, `background-color:rgba(255,0,0,${redSum/max});color:red;`);
-  document.getElementById("greenVol").setAttribute(`style`, `background-color:rgba(0,255,0,${greenSum/max});color:green;`);
-  document.getElementById("blueVol").setAttribute(`style`, `background-color:rgba(0,0,255,${blueSum/max});color:blue`);
+  document.getElementById("redVolCircle").setAttribute(`fill`, `rgba(255,0,0,${redSum/halfMax})`);
+  document.getElementById("greenVolCircle").setAttribute(`fill`, `rgba(0,255,0,${greenSum/halfMax})`);
+  document.getElementById("blueVolCircle").setAttribute(`fill`, `rgba(0,0,255,${blueSum/halfMax})`);
 }
 
 const stopIntervalButton = document.getElementById('stopIntervalButton');
@@ -153,22 +164,37 @@ function pauseAll(){
   soundObj['audio3'].pause();
 }
 
+let errorMessage = '';
+
+function setErrors(){
+  document.getElementById('errors').innerHTML = errorMessage;
+}
+
 function handleAudio(e){
+  errorMessage = ''
+  let filename = e.target.files[0].name
+  let ext = filename.substr(filename.lastIndexOf('.')+1);
+  if(ext.toLowerCase() !== 'mp3' && ext.toLowerCase() !== 'wav'){
+    errorMessage = 'Audio file must be WAV or MP3.';
+    setErrors();
+    return null;
+  }
 
-    let audioId = e.currentTarget.id;
+  let audioId = e.currentTarget.id;
 
-    let reader = new FileReader();
-    reader.onload = function(event){
-      howl = new Howl({
-        preload: true,
-        volume: 0,
-        src: [event.target.result],
-      });
-      soundObj[audioId] = howl;
-      setAudioNames();
-    }
-    audioNames[audioId] = e.target.files[0].name;
-    reader.readAsDataURL(e.target.files[0]);
+  let reader = new FileReader();
+  reader.onload = function(event){
+    howl = new Howl({
+      preload: true,
+      volume: 0,
+      src: [event.target.result],
+    });
+    soundObj[audioId] = howl;
+    setErrors();
+    setAudioNames();
+  }
+  audioNames[audioId] = filename;
+  reader.readAsDataURL(e.target.files[0]);
 }
 
 const imageLoader = document.getElementById('imageLoader');
@@ -178,17 +204,27 @@ imageLoader.addEventListener('change', handleImage, false);
 let currentImgName;
 
 function handleImage(e){
+  errorMessage = ''
+  let filename = e.target.files[0].name
+  let ext = filename.substr(filename.lastIndexOf('.')+1);
+  if(ext.toLowerCase() !== 'png' && ext.toLowerCase() !== 'jpg' && ext.toLowerCase() !== 'jpeg'){
+    errorMessage = 'Image file must be PNG or JPG.';
+    setErrors();
+    return null;
+  }
+
     let reader = new FileReader();
     reader.onload = function(event){
       let img = new Image();
       img.onload = function(){
         currentImg = img;
         setImageName()
+        setErrors();
         redraw();
       }
       img.src = event.target.result;
     }
-    currentImgName = e.target.files[0].name;
+    currentImgName = filename;
     reader.readAsDataURL(e.target.files[0]);
 }
 
@@ -197,9 +233,10 @@ Array.prototype.forEach.call(colorButtons, (button) =>{
   button.addEventListener('click', changeColor, false);
 });
 
+const currentColorButton = document.getElementById("currentColorButton");
 function changeColor(e){
   curColor = eval(e.currentTarget.id);
-  document.getElementById("currentColorButton").setAttribute(`style`, `color:${curColor};`);
+  currentColorButton.setAttribute(`style`, `color:${curColor};`);
 }
 
 const instruxButton = document.getElementById('instruxButton');
@@ -217,8 +254,8 @@ function unloadInstrux(){
 }
 
 $(canvasEl).mousedown(function(e){
-  let mouseX = e.pageX - this.offsetLeft + 12;
-  let mouseY = e.pageY - this.offsetTop + 12;
+  let mouseX = e.pageX - this.offsetLeft + 35;
+  let mouseY = e.pageY - this.offsetTop + 35;
 
   paint = true;
   addClick(mouseX, mouseY);
@@ -226,8 +263,8 @@ $(canvasEl).mousedown(function(e){
 });
 
 $(canvasEl).mousemove(function(e){
-  let mouseX = e.pageX - this.offsetLeft + 12;
-  let mouseY = e.pageY - this.offsetTop + 12;
+  let mouseX = e.pageX - this.offsetLeft + 35;
+  let mouseY = e.pageY - this.offsetTop + 35;
 
   if(paint){
     addClick(mouseX, mouseY, true);
@@ -302,7 +339,7 @@ function redraw(){
   }
 
   ctx.lineJoin = "round";
-  ctx.lineWidth = 25;
+  ctx.lineWidth = 70;
 
   for(let i=0; i < clickX.length; i++) {
     ctx.beginPath();
@@ -322,12 +359,14 @@ let sampleRGB1 = document.getElementById("Hum_RGB_1");
 let sampleRGB2 = document.getElementById("Hum_RGB_2");
 let sampleRGB3 = document.getElementById("Hum_RGB_3");
 let sampleRGB4 = document.getElementById("Hum_RGB_4");
+let sampleRGB5 = document.getElementById("Hum_RGB_5");
 
-let sampleImgSelect = [false, false, false, false];
+let sampleImgSelect = [false, false, false, false, false];
+let sampleAudSelect = [false, false, false, false];
 
 loadDefaultImage = function(){
     let pickedImg;
-    let rand = Math.floor((Math.random() * 4) + 1);
+    let rand = Math.floor((Math.random() * 5) + 1);
     switch (rand){
       case 1:
         pickedImg = sampleRGB1;
@@ -349,6 +388,11 @@ loadDefaultImage = function(){
         currentImgName = 'Hum_RGB_4.png';
         sampleImgSelect[3] = true;
         break;
+      case 5:
+        pickedImg = sampleRGB5;
+        currentImgName = 'Hum_RGB_5.png';
+        sampleImgSelect[4] = true;
+        break;
       default:
         pickedImg = sampleRGB1;
         currentImgName = 'Hum_RGB_1.png';
@@ -362,9 +406,6 @@ loadDefaultImage = function(){
       redraw();
     }
 }
-
-// requires server!
-loadDefaultImage();
 
 const sampleImgNumbers = document.getElementsByClassName('sampleImgNumber');
 
@@ -383,8 +424,6 @@ function readySampleImgNumbers(){
   });
 }
 
-readySampleImgNumbers();
-
 function setSampleImgNumber(){
   Array.prototype.forEach.call(sampleImgNumbers, (imgNumber) =>{
     let n = parseInt(imgNumber.attributes.data.value);
@@ -392,6 +431,32 @@ function setSampleImgNumber(){
       imgNumber.setAttribute(`style`, `color:white;`);
     } else {
       imgNumber.setAttribute(`style`, `color:default;`);
+    }
+  });
+}
+
+const sampleAudNumbers = document.getElementsByClassName('sampleAudNumber');
+
+function readySampleAudNumbers(){
+  Array.prototype.forEach.call(sampleAudNumbers, (audNumber) => {
+    audNumber.addEventListener('click', (e) => {
+      stopInterval();
+      sampleAudSelect = [false, false, false, false];
+      let n = parseInt(e.currentTarget.attributes.data.value);
+      loadSampleHowls(n);
+      sampleAudSelect[n] = true;
+      setSampleAudNumber();
+    });
+  });
+}
+
+function setSampleAudNumber(){
+  Array.prototype.forEach.call(sampleAudNumbers, (audNumber) =>{
+    let n = parseInt(audNumber.attributes.data.value);
+    if(sampleAudSelect[n] === true){
+      audNumber.setAttribute(`style`, `color:white;`);
+    } else {
+      audNumber.setAttribute(`style`, `color:default;`);
     }
   });
 }
@@ -406,6 +471,16 @@ function setAudioNames(){
   document.getElementById("blueAudioName").innerHTML = audioNames['audio3'];
 }
 
+// meow
+// requires server!
+// loadDefaultImage();
+
 window.onload = function(){
-  setTimeout(loadInstrux, 1000);
+  readySampleImgNumbers();
+  readySampleAudNumbers();
+  loadSampleHowls(0);
+  setAudioNames();
+  setHints();
+  // meow
+  // setTimeout(loadInstrux, 500);
 }
