@@ -428,3 +428,30 @@ a:active{
   right: 311px;
   top: 120px;
 }
+
+.loader{
+  margin: 0 0 2em;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  padding: 1em;
+  padding-top:3em;
+  margin: 0 auto 1em;
+  display: inline-block;
+  vertical-align: top;
+  position: absolute;
+  z-index: 300;
+  opacity: 1;
+  background: -moz-linear-gradient(top, #555 0px, #222 740px, bisque 756px, bisque 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #555 0px,#222 740px,bisque 756px,bisque 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #555 0px,#222 740px,bisque 756px,bisque 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+/*
+  Set the color of the icon
+*/
+.loader svg path,
+.loader svg rect{
+  /*fill: #FF6700;*/
+  fill: bisque;
+}
