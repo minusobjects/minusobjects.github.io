@@ -63,10 +63,18 @@ a:active{
   margin-left:-300px;
   background-color:bisque;
   padding-left:30px;
-  padding-right:50px;
+  padding-right:30px;
   padding-bottom:30px;
   padding-top:20px;
   color:#666;
+}
+.innerInstruxText{
+  border: 1px solid #ccb373;
+  border-radius: 10px;
+  padding-left: 24px;
+  padding-right: 30px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 .innerInstrux h3{
   margin-bottom:.3em;
@@ -371,10 +379,11 @@ a:active{
   -webkit-margin-end: auto;
 }
 .instruxHR{
-  width:70%;
-  background:rgba(85,85,85,.7);
+  width:100%;
+  background:rgba(204,180,115,.7);
   border: 0;
   height: 1px;
+  /*margin-left: 0px;*/
   -webkit-margin-before: 0em;
   -webkit-margin-after: 0em;
   -webkit-margin-start: auto;
