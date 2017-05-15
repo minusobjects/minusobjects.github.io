@@ -1,4 +1,3 @@
-
 let enableStr = 'enable';
 
 const allHintButtons = [clearImgButton, clearPaintButton, colorButtons,

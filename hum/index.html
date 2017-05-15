@@ -56,6 +56,9 @@
         repeatCount="indefinite"/>
       </path>
     </svg>
+    <div class="loadingText">
+      LOADING
+    </div>
   </div>
 
     <div id="main" class="mainDiv">
@@ -89,22 +92,22 @@
 
       <li>
         <label>
-          <i id="audio1Button" title="audio1Button" class="fa fa-file-audio-o button audioLoaderButton" style="color:red"></i>
-          <input type="file" class="audioLoader" id="audio1" name="audioLoader1" style="display:none;"/>
+          <i id="redAudioButton" title="redAudioButton" class="fa fa-file-audio-o button audioLoaderButton" style="color:red"></i>
+          <input type="file" class="audioLoader" id="red" name="audioLoader1" style="display:none;"/>
         </label>
       </li>
 
       <li>
         <label>
-          <i id="audio2Button" title="audio2Button" class="fa fa-file-audio-o button audioLoaderButton" style="color:green"></i>
-          <input type="file" class="audioLoader" id="audio2" name="audioLoader2" style="display:none;"/>
+          <i id="greenAudioButton" title="greenAudioButton" class="fa fa-file-audio-o button audioLoaderButton" style="color:green"></i>
+          <input type="file" class="audioLoader" id="green" name="audioLoader2" style="display:none;"/>
         </label>
       </li>
 
       <li>
         <label>
-          <i id="audio3Button" title="audio3Button" class="fa fa-file-audio-o button audioLoaderButton" style="color:blue"></i>
-          <input type="file" class="audioLoader" id="audio3" name="audioLoader3" style="display:none;"/>
+          <i id="blueAudioButton" title="blueAudioButton" class="fa fa-file-audio-o button audioLoaderButton" style="color:blue"></i>
+          <input type="file" class="audioLoader" id="blue" name="audioLoader3" style="display:none;"/>
         </label>
       </li>
 
@@ -195,23 +198,23 @@
       </li>
 
       <li>
-        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB1' title='sampleRGB1' data=0>1</a></div>
+        <div class="textButton"><a class='sampleImgNumber' title="1" data=0>1</a></div>
       </li>
 
       <li>
-        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB2' title='sampleRGB2' data=1>2</a></div>
+        <div class="textButton"><a class='sampleImgNumber' title="2" data=1>2</a></div>
       </li>
 
       <li>
-        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB3' title='sampleRGB3' data=2>3</a></div>
+        <div class="textButton"><a class='sampleImgNumber' title="3" data=2>3</a></div>
       </li>
 
       <li>
-        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB4' title='sampleRGB4' data=3>4</a></div>
+        <div class="textButton"><a class='sampleImgNumber' title="4" data=3>4</a></div>
       </li>
 
       <li>
-        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB5' title='sampleRGB5' data=4>5</a></div>
+        <div class="textButton"><a class='sampleImgNumber' title="5" data=4>5</a></div>
       </li>
 
       <li>
@@ -310,11 +313,16 @@
   <img src="defaults/Hum_RGB_4.png" style="display:none;" id="Hum_RGB_4"/>
   <img src="defaults/Hum_RGB_5.png" style="display:none;" id="Hum_RGB_5"/>
   </div>
-  <script src="jquery-3.2.1.min.js"></script>
-  <script src="jquery-ui.min.js"></script>
-  <script src="howler-dist/howler.js"></script>
-  <script src="hum.js"></script>
-  <script src="tooltips.js"></script>
+  <script src="./js/libraries/jquery-3.2.1.min.js"></script>
+  <script src="./js/libraries/jquery-ui.min.js"></script>
+  <script src="./js/libraries/howler-dist/howler.js"></script>
+  <script src="./js/canvas.js"></script>
+  <script src="./js/image.js"></script>
+  <script src="./js/audio.js"></script>
+  <script src="./js/color_timer.js"></script>
+  <script src="./js/buttons.js"></script>
+  <script src="./js/hum.js"></script>
+  <script src="./js/tooltips.js"></script>
   <!-- <script src="test_paint_2.js"></script> -->
   </body>
 </html>
