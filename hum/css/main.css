@@ -33,6 +33,7 @@ a:active{
   position:absolute;
   width:100%;
   height:100%;
+  min-height: 760px;
   background: -moz-linear-gradient(top, #555 0px, #222 740px, bisque 756px, bisque 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top, #555 0px,#222 740px,bisque 756px,bisque 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, #555 0px,#222 740px,bisque 756px,bisque 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -100,7 +101,7 @@ a:active{
   position:absolute;
   background-color:black;
   z-index:10;
-  cursor: url(./circle_70.png), auto;
+  cursor: url(./assets/circle_70.png), auto;
 }
 
 .bar{
@@ -111,7 +112,7 @@ a:active{
   height:600px;
   z-index:30;
   margin-left:0px;
-  cursor: url(./circle_70.png), auto;
+  cursor: url(./assets/circle_70.png), auto;
   display:none;
 }
 
@@ -385,7 +386,7 @@ a:active{
   position: absolute;
   right: 107px;
   top: 73px;
-  background-image: url('./HumLogo3.png');
+  background-image: url('./assets/HumLogo3.png');
   background-repeat: no-repeat;
   background-size: 190px auto;
   opacity:.8;

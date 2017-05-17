@@ -2,7 +2,7 @@ let enableStr = 'enable';
 
 const allHintButtons = [clearImgButton, clearPaintButton, colorButtons,
 currentColorButton, stopIntervalButton, colorInfoButton,
-'#audio1Button', '#audio2Button', '#audio3Button',
+'#redAudioButton', '#greenAudioButton', '#blueAudioButton',
 '#imageLoaderButton', '#redVol', '#greenVol', '#blueVol',
 sampleImgNumbers, sampleAudNumbers, '#imageName', '#redAudioName', '#greenAudioName',
 '#blueAudioName', instruxButton, '#sampleImgStatic', '#sampleAudStatic'];
@@ -91,21 +91,21 @@ $("#blueVol").tooltip({
   show: { duration: 300 },
   content: "Audio level for the blue channel."
 });
-$('#audio1Button').tooltip({
+$('#redAudioButton').tooltip({
   classes: {
     "ui-tooltip": "highlight"
   },
   show: { duration: 300 },
   content: "Load your own audio (MP3 or WAV) into the red channel."
 });
-$('#audio2Button').tooltip({
+$('#greenAudioButton').tooltip({
   classes: {
     "ui-tooltip": "highlight"
   },
   show: { duration: 300 },
   content: "Load your own audio (MP3 or WAV) into the green channel."
 });
-$('#audio3Button').tooltip({
+$('#blueAudioButton').tooltip({
   classes: {
     "ui-tooltip": "highlight"
   },

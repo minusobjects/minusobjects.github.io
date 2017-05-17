@@ -1,12 +1,5 @@
 ## Hum
 
-**Known issues, 5-7-17**
-- No error handling yet for when users input incorrect files.
-- Need to see if I can get the canvas to re-render quicker after paint input.
-- Styling could be tighter.
-- Need to break JS file into multiple files.
-- Need to add live links in instructions.
-
 ### Background
 
 Hum will be a tool to mix sound via images: the RGB pixel data of a given image will modulate the volume of three sound files (one for each channel). My goal for this project is that it may be a fun and intuitive music-making tool for people without much musical experience (which would include myself).
@@ -41,8 +34,8 @@ There will be individual scripts to handle distinct elements of the app: `displa
 
 The app will consist of a single screen (plus the instructions modal). There will be simple controls to upload files and to play/pause/stop the audio. There will also be links to my own sites (Github, LinkedIn, etc.). Most of the app will be given over to the uploaded image - in a sense this app can also function as a sort of gallery display for a given image.
 
-![image of main app](./hum_main_app.png)
-![image of instructions](./hum_instructions.png)
+![image of main app](./wireframes/hum_main_app.png)
+![image of instructions](./wireframes/hum_instructions.png)
 
 ### Implementation Timeline
 

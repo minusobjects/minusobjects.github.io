@@ -65,6 +65,8 @@ function handleAudio(e){
     });
     soundObj[color] = howl;
     setErrors();
+    sampleAudSelect = [false,false,false,false];
+    setSampleAudNumber();
     setAudioName(color, filename);
   }
   reader.readAsDataURL(e.target.files[0]);
