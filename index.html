@@ -1,247 +1,127 @@
-<!DOCTYPE HTML>
-<!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>Michael Newton</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		<link rel="stylesheet" type="text/css" href="assets/css/devicons.css" />
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>minusobjects.github.io</title>
+    <link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow|PT+Sans|PT+Sans:700|Average+Sans"/>
+    <style type="text/css">
+      html{
+        height: 100%;
+      }
 
-		<script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to bottom, #f4dfa8 0%,#f4ead2 100%);
+        color: #333;
+        font-family: PT Sans, Average Sans, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 200;
+      }
 
-		  ga('create', 'UA-93699540-1', 'auto');
-		  ga('send', 'pageview');
-	</script>
-	</head>
-	<body>
+      a {
+        text-decoration: none;
+        color: #666;
+        cursor: pointer;
+      }
 
-		<!-- Sidebar -->
-			<section id="sidebar">
-				<div class="inner">
-					<nav>
-						<ul>
-							<li><a href="#intro">Welcome</a></li>
-							<li><a href="#one">Projects</a></li>
-							<li><a href="#two">Skills</a></li>
-							<li><a href="#three">Contact</a></li>
-						</ul>
-					</nav>
-				</div>
-			</section>
+      a:hover {
+        opacity: .5;
+      }
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+      a:active {
+        color: #888;
+      }
 
-				<!-- Intro -->
-					<section id="intro" class="wrapper style1 fullscreen fade-up">
-						<div class="inner">
-							<div style="margin-right:22px; margin-left:-20px; margin-top:4px; display:inline">
-							<img src="images/Aa-MN-smaller.png" alt="MN" data-position="left top" style="width:100px;border-radius:50%;margin-left:10px; display:inline;"/>
-						</div>
-							<h1 style="display:inline;position:absolute;margin-top:40px;">Michael Newton, Web Developer</h1>
-							<div style="display:flex">
-								<!-- <div style="margin-right:18px; margin-top:4px;">
-								<img src="images/Aa-MN-smaller.png" alt="MN" data-position="left top" style="width:100px;border-radius:50%;margin-left:10px; display:inline;"/>
-							</div> -->
-							<div>
-							<p>Brooklyn-based web developer, experienced in JavaScript, React/Redux, Ruby, Rails, HTML5, CSS3, and SQL. I have a background in visual/graphic design, and I like to approach projects with both core functionality and aesthetic relationships in mind. I'm excited about the vast creative potential of the internet. I love the logical challenges of coding, and the satisfaction of seeing a great project come together.</p>
-						</div>
-							</div>
-							<ul class="actions" style="margin-left:12px;">
-								<li><a href="#one" class="button scrolly">Projects</a></li>
-								<li><a href="assets/docs/MN-Resume-May2017.pdf" class="button scrolly" target="_blank">Resume</a></li>
-								<li><a href="mailto:mn@one-timepad.com" class="button scrolly">Email</a></li>
-							</ul>
-						</div>
-					</section>
+      .mainDiv {
+        position: relative;
+        width: 80%;
+        max-width: 600px;
+        height: 450px;
+        margin: 20px auto 0 auto;
+        padding: 30px 26px;
+        background-color: #e8e8e8;
+        color: #888;
+        border-radius: 10px;
+        box-shadow: 0 2px 2px 3px rgba(0,0,0,.1);
+      }
 
-				<!-- One -->
-					<section id="one" class="wrapper style2 spotlights">
-						<section>
-							<a href="http://www.message-medium.net/" class="image" target="_blank"><img src="images/message-cap.png" alt="Message" data-position="left top" /></a>
-							<div class="content">
-								<div class="inner">
-									<h2>Message</h2>
-									<p>Full-stack blogging app inspired by Medium. Built with Ruby on Rails, PostgreSQL, JavaScript, React.js/Redux, HTML5, and CSS3</p>
-									<ul>
-										<li>Leveraged complex SQL queries via Ruby on Rails/ActiveRecord and jBuilder to quickly load information from the database, improving overall app performance and allowing for quick display of all recent user activity.</li>
-										<li>Integrated the QuillJS API to facilitate seamless inline editing, allowing users to easily add rich text styling to their stories.</li>
-										<li>Utilized modular React components and CSS transitions to create a stream- lined, stylish UI, with dynamic changes based on database updates (users recommending stories, following other users, adding comments, etc.).</li>
-									</ul>
-									<ul class="actions">
-										<li><a href="https://github.com/minusobjects/Message-Medium" class="button" target="_blank">GitHub</a></li>
-										<li><a href="http://www.message-medium.net/" class="button" target="_blank">Live Demo</a></li>
-									</ul>
-								</div>
-							</div>
-						</section>
-						<section>
-							<a href="http://www.one-timepad.com/hum/" class="image" target="_blank"><img src="images/hum-cap-2.jpg" alt="" data-position="center top" /></a>
-							<div class="content">
-								<div class="inner">
-									<h2>Hum</h2>
-									<p>Color-based, visual music/audio mixer and instrument. Built with JavaScript, HTML5/Canvas, and CSS3</p>
-									<ul>
-										<li>Implemented JavaScript image analysis to dynamically interpret color data.</li>
-										<li>Worked with the HowlerJS API and HTML5 audio API to create intuitive UX.</li>
-										<li>Devised JavaScript algorithms to manage audio manipulation.</li>
-									</ul>
-									<ul class="actions">
-										<li><a href="https://github.com/minusobjects/Hum" class="button" target="_blank">GitHub</a></li>
-										<li><a href="http://www.one-timepad.com/hum/" class="button" target="_blank">Live Demo</a></li>
-									</ul>
-								</div>
-							</div>
-						</section>
-						<section>
-							<a href="https://github.com/minusobjects/BvY_Chess" class="image" target="_blank"><img src="images/bvychess-cap.jpg" alt="" data-position="left top" /></a>
-							<div class="content">
-								<div class="inner">
-									<h2>BvY Chess</h2>
-									<p>Terminal chess game. Built in Ruby.</p>
-									<ul>
-										<li>Implemented object-oriented programming patterns to create a functional chess game with computer opponent.</li>
-										<li>Developed algorithms to calculate game state and measure moves by AI.</li>
-									</ul>
-									<ul class="actions">
-										<li><a href="https://github.com/minusobjects/BvY_Chess" class="button" target="_blank">GitHub</a></li>
-										<!-- <li><a href="" class="button" target="_blank">Live Demo</a></li> -->
-									</ul>
-								</div>
-							</div>
-						</section>
-					</section>
+      .title {
+        width: 100%;
+        padding-bottom: 12px;
+        color: tomato;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 1.3em;
+        letter-spacing: .1em;
+        border-bottom: 1px solid rgba(160,82,45,.3);
+      }
 
-				<!-- Two -->
-					<section id="two" class="wrapper style3 fade-up">
-						<div class="inner">
-							<h2>Skills</h2>
-							<div class="features">
-								<section>
-									<span class="icon major devicons devicons-javascript_badge"></span>
-									<h3>JavaScript</h3>
-								</section>
-								<section>
-									<span class="icon major devicons devicons-jquery"></span>
-									<h3>jQuery</h3>
-								</section>
-								<section>
-									<span class="icon major devicons devicons-react"></span>
-									<h3>React.js</h3>
-								</section>
-								<section>
-									<span class="icon major devicons devicons-code"></span>
-									<h3>Redux</h3>
-								</section>
-								<section>
-									<span class="icon major devicons devicons-ruby"></span>
-									<h3>Ruby</h3>
-								</section>
-								<section>
-									<span class="icon major devicons devicons-ruby_on_rails"></span>
-									<h3>Rails</h3>
-								</section>
-								<section>
-									<span class="icon major devicons devicons-html5"></span>
-									<h3>HTML</h3>
-								</section>
-								<section>
-									<span class="icon major devicons devicons-css3"></span>
-									<h3>CSS</h3>
-								</section>
-								<section>
-									<span class="icon major devicons devicons-code_badge"></span>
-									<h3>RSpec</h3>
-								</section>
-								<section>
-									<span class="icon major devicons devicons-database"></span>
-									<h3>SQL</h3>
-								</section>
-								<section>
-									<span class="icon major devicons devicons-git"></span>
-									<h3>Git</h3>
-								</section>
-								<section>
-									<span class="icon major devicons devicons-heroku"></span>
-									<h3>Heroku</h3>
-								</section>
-								<section>
-									<span class="icon major devicons devicons-photoshop"></span>
-									<h3>Photoshop</h3>
-								</section>
-								<section>
-									<span class="icon major devicons devicons-illustrator"></span>
-									<h3>Illustrator</h3>
-								</section>
-							</div>
-						</div>
-					</section>
+      .intSection {
+        margin-top: 40px;
+        text-align: center;
+      }
 
-				<!-- Three -->
-					<section id="three" class="wrapper style1 fade-up">
-						<div class="inner">
-							<h2>Contact</h2>
-							<img src="images/Aa-MN-smaller.png" alt="MN" data-position="left top" style="width:100px;border-radius:50%;margin-left:10px"/>
-							<p>I'm currently on the job market. <br/>Get in touch!</p>
-							<ul class="contact">
-								<li>
-									<h3>Location</h3>
-									<span>Brooklyn, NY</span>
-								</li>
-								<li>
-									<h3>Email</h3>
-									<a href="mailto:mn@one-timepad.com">mn@one-timepad.com</a>
-								</li>
-								<li>
-									<h3>Phone</h3>
-									<span>(614) 561-2923</span>
-								</li>
-								<li>
-									<h3>Social</h3>
-									<ul class="icons">
-										<li><a href="https://www.linkedin.com/in/michael-newton-976588140/" class="fa fa-linkedin social-icon" target="_blank"><span class="label">LinkedIn</span></a></li>
-										<li><a href="https://angel.co/michael-newton-6" class="fa fa-angellist social-icon" target="_blank"><span class="label">AngelList</span></a></li>
-										<li><a href="https://github.com/minusobjects" class="fa fa-github social-icon" target="_blank"><span class="label">GitHub</span></a></li>
-										<!-- <li><a href="#" class="fa fa-twitter social-icon" target="_blank"><span class="label">Twitter</span></a></li> -->
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</section>
+      .int {
+        margin: 0 auto;
+        padding-top: 7px;
+        text-align: center;
+        font-size: 1.1em;
+        letter-spacing: .1em;
+      }
 
-			</div>
+      .int2 {
+        width: 240px;
+        margin: 0;
+        padding-top: 2em;
+        font-size: 1.1em;
+        text-align: center;
+        color: sienna;
+        display: inline-block;
+      }
 
-		<!-- Footer -->
-			<footer id="footer" class="wrapper style1-alt">
-				<div class="inner">
-					<ul class="menu">
-						<li>&copy; Michael Newton. All rights reserved.</li><li>Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a></li>
-					</ul>
-				</div>
-			</footer>
+      .int2 a {
+        color: maroon;
+      }
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+      .int2 a:active {
+        color: sienna;
+      }
 
-	</body>
+      .int2 hr {
+        height: 1px;
+        background: rgba(160,82,45,.3);
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="mainDiv">
+        <div class="title">
+          minusobjects.github.io
+        </div>
+        <div class="intSection">
+          <div class="int">
+            Hello, thank you for stopping by.<br/>
+            Here's where you might want to go next:
+          </div>
+          <div class="int2">
+            <a href="http://www.one-timepad.com">one-timepad.com</a><br/>
+            (my personal site)
+            <hr/>
+            <a href="http://github.com/minusobjects">github.com/minusobjects</a><br/>
+            (my GitHub page)
+          </div>
+          <br/><br/>
+          <img src="Cat-Gif-Mod.gif" width="150px"/>
+          <br/><br/>
+          Mike Newton, 2018<br/>
+          sleeping cat GIF by <a href="https://snivyluv.deviantart.com/art/Kitty-Cat-Sleeping-Gif-522289520">snivyluv</a>
+        </div>
+      </div>
+    </div>
+    <!-- Mike Newton &#174; 2018 -->
+  </body>
 </html>
