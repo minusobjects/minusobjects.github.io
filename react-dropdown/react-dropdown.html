@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<style media="screen">
+			body {
+				background-color: #ddd;
+				font-family: sans-serif;
+				font-size: 16px;
+				line-height: 1.5;
+				padding: 30px;
+				color: #333;
+			}
+			button {
+				font-size: 16px;
+				padding: 8px;
+				cursor: pointer;
+			}
+			.dropdown-menu {
+				background-color: white;
+				padding: 8px;
+			}
+			.dropdown-item {
+				margin-top: 8px;
+				margin-bottom: 8px;
+			}
+		</style>
+		<title>React Dropdown</title>
+	</head>
+	<body>
+		<div id='dropdown-root'>This text should not be visible after a few seconds.</div>
+	</body>
+</html>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+<script type="text/babel">
+	class MultiselectDropdown extends React.Component {
+	    constructor(props) {
+	      super(props);
+	      this.mainElement = null;
+	      this.buttonElement = null;
+	      this.optionElements = {};
+	      this.optionsMax = null;
+	      this.state = {
+	        isMenuOpen: false,
+	        optionInFocus: null,
+	        checkedItems: {}
+	      };
+	      this.handleClick = this.handleClick.bind(this);
+	      this.toggleMenu = this.toggleMenu.bind(this);
+	    }
+
+	    componentDidMount() {
+	      const checkedObj = {};
+	      this.props.menuOptions.forEach((option, i) => {
+	        checkedObj[i] = false;
+	      });
+	      this.optionsMax = this.props.menuOptions.length - 1;
+	      this.setState({checkedItems: checkedObj});
+	    }
+
+	    componentDidUpdate() {
+	      // does this really need to be on update?
+	      if (this.state.optionInFocus != null) {
+	        this.optionElements[this.state.optionInFocus].focus();
+	      }
+	    }
+
+	    handleClick(e) {
+	      console.warn('handleClick');
+	      if (!this.mainElement.contains(e.target)) {
+	        this.toggleMenu(e);
+	      }
+	    }
+
+	    toggleMenu(e) {
+	      if (!this.state.isMenuOpen) {
+	        document.addEventListener("mousedown", this.handleClick);
+	        this.props.onMenuOpen(e);
+	      } else {
+	        document.removeEventListener("mousedown", this.handleClick);
+	        this.props.onMenuClose(e);
+	      }
+	      this.setState({isMenuOpen: !this.state.isMenuOpen, optionInFocus: null});
+	    }
+
+	    checkItem(i, e) {
+	      if (this.state.checkedItems[i]) {
+	        this.props.onOptionUnchecked(e);
+	      } else {
+	        this.props.onOptionChecked(e);
+	      }
+	      this.setState({
+	        checkedItems: Object.assign(this.state.checkedItems, {[i]: !this.state.checkedItems[i]})
+	      });
+	    }
+
+	    moveDown() {
+	      let currentOption = this.state.optionInFocus == null ? -1 : this.state.optionInFocus;
+	      this.setState({optionInFocus: currentOption === this.optionsMax ? 0 : currentOption + 1});
+	    }
+
+	    moveUp() {
+	      let currentOption = this.state.optionInFocus == null ? 0 : this.state.optionInFocus;
+	      this.setState({optionInFocus: currentOption === 0 ? this.optionsMax : currentOption - 1});
+	    }
+
+	    returnOrSpace(e) {
+	      e.preventDefault();
+	      if (this.state.isMenuOpen && e.target != this.buttonElement) {
+	        this.checkItem(this.state.optionInFocus, e);
+	      } else {
+	        this.toggleMenu(e);
+	      }
+	    }
+
+	    escapeOrTab(e) {
+	      if (this.state.isMenuOpen) {
+	        e.preventDefault();
+	        this.toggleMenu(e);
+	        this.buttonElement.focus();
+	      }
+	    }
+
+	    menuNav(e) {
+	      switch(e.keyCode) {
+	        case 9:
+	        case 27:
+	          // 9 = tab, 27 = escape
+	          this.escapeOrTab(e);
+	          break;
+	        case 13:
+	        case 32:
+	          // 13 = return, 32 = space
+	          this.returnOrSpace(e);
+	          break;
+	        // case 37:
+	        case 38:
+	          // 37 = left, 38 = up
+	          this.moveUp();
+	          break;
+	        // case 39:
+	        case 40:
+	          // 39 = right, 40 = down
+	          this.moveDown();
+	          break;
+	        default:
+	          return;
+	      }
+	    }
+
+	    renderMenu(options) {
+	      options = options.map((option, i) => {
+	        return (
+	          <label tabIndex="0" className="dropdown-item" role="checkbox" aria-checked={this.state.checkedItems[i]} key={`menu-option-${i}`} ref={(el) => {this.optionElements[i] = el}} onClick={(e) => {
+	            e.preventDefault();
+	            this.checkItem(i, e);
+	            // do we really want the item to not be in focus?
+	            // this.setState({optionInFocus: null})
+	            this.setState({optionInFocus: i});
+	          }} style={{display:'flex',flexDirection:'row',cursor:'pointer'}}>
+	            <input type="checkbox" value="on" checked={this.state.checkedItems[i]} readOnly></input>
+	            <div className="faux-input" style={{paddingLeft:'6px'}}></div>
+	            <span>{option}</span>
+	          </label>
+	        );
+	      });
+	      return options;
+	    }
+
+	  render() {
+	    return (
+	      <div className="multi-select-demo">
+	        <div 
+	          className="amplify-dropdown amplify-multi-select" 
+	          id="multi-select-menu" 
+	          ref={(el) => {this.mainElement = el}} 
+	          onKeyDown={(e) => this.menuNav(e)}
+	          onFocus={(e) => {
+	            console.warn('onFocus!');
+	            // would be really nice if we could tell if it was from mouse or keyboard... can we?
+	            console.warn(e);
+	          }}
+	          style={{width:'200px'}}>
+	          <button 
+	            className="btn" 
+	            type="button" 
+	            aria-haspopup="true" 
+	            aria-expanded={this.state.isMenuOpen ? "true" : "false"} 
+	            tabIndex="0" 
+	            id="multi-select-button" 
+	            onClick={this.toggleMenu} 
+	            ref={(el) => {this.buttonElement = el}} 
+	            style={{backgroundColor:'cornsilk', width:'200px'}}>
+	            {this.props.buttonText}
+	           </button>
+	          <div className="dropdown-menu" aria-labelledby="multi-select-button" style={{display: this.state.isMenuOpen ? 'block' : 'none',top:'30px'}}>
+	            {this.optionsMax && this.renderMenu(this.props.menuOptions)}
+	        </div>
+	      </div>
+	    </div>
+	    );
+	  }
+	};
+
+	MultiselectDropdown.defaultProps = {
+	  // we might also need to have some default checked items
+	  // also need some sort of id to be used with labelled-by - id="multi-select-button"
+	  buttonText: 'Select multiple items',
+	  menuOptions: [
+	    'Teacher', 'Administrator', 'Principal', 'Staff', 'Assistant to the Associate Minister of Directors', 'Evaluator'
+	  ],
+	  onMenuOpen: (e) => {console.warn('onMenuOpen'); console.warn(e.type);},
+	  onMenuClose: (e) => {console.warn('onMenuClose'); console.warn(e.type);},
+	  onOptionChecked: (e) => {console.warn('onOptionChecked'); console.warn(e.type);},
+	  onOptionUnchecked: (e) => {console.warn('onOptionUnchecked'); console.warn(e.type);},
+	};
+
+	setTimeout(() => {
+		const multiselectCutAndPaste = document.getElementById('dropdown-root');
+
+		console.warn('I AM RUNNING! basic cut and paste');
+		console.warn(multiselectCutAndPaste);
+
+		if (multiselectCutAndPaste) {
+		    ReactDOM.render( 
+		    <MultiselectDropdown />,
+		        multiselectCutAndPaste
+		    );
+		};
+	}, 0);
+</script>
