@@ -1,1 +1,137 @@
-NOSE!!!!
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=yes">
+  <title>Nose Tracker Test 3</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:700" rel="stylesheet">
+	<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+	<acc-side-panel id="SidePanel" label="Components">
+	    <acc-group label="Tracking">
+	        <acc-input-mode-select contentselector="#main-content" hidelabel>
+	            <acc-mouse-input amplification="10" label="Custom Mouse/Keyboard"></acc-mouse-input>
+	            <acc-pose-input amplification="2" smoothing="0.5"></acc-pose-input>
+	        </acc-input-mode-select>
+	    </acc-group>
+	</acc-side-panel>
+<acc-content id="main-content" shortcut="Shift c" webcamopacity="0.25" grayscale mounted>
+				<div id="cursor">
+			    <div id="NoseWrap" class="nosewrap">
+			    <div class="nose n1">👃</div>
+			    <div class="nose n2">👃</div>
+			    <div class="nose n3">👃</div>
+			    <div class="nose n4">👃</div>
+			    <div class="nose n5">👃</div>
+			    <div class="nose n6">👃</div>
+			      <div class="nose n0">👃</div>
+			  </div>
+			</div>
+	    <div id="svgpattern">
+	        <svg><pattern id="pattern-wave" x="0" y="28" patternUnits="userSpaceOnUse" width="320" height="32" viewBox="0 0 80 8"> 
+	           <g id="wave">
+	             <path d="M0,4 C13.3333333,-1.33333333 26.0444444,-1.33333333 38.1333333,4 C56.2666667,12 80,4 80,4 C80,4 80,5.33333333 80,8 L0,8 L0,4 Z"/>
+	           </g>
+	           <use x="0" y="0" xlink:href="#wave" />
+	         </pattern></svg>
+	         <svg><pattern id="pattern-wavetop" x="0" y="28" patternUnits="userSpaceOnUse" width="320" height="32" viewBox="0 0 80 8"> 
+	               <g id="wavetop">
+	                 <path d="M0,4 C13.3333333,-1.33333333 26.0444444,-1.33333333 38.1333333,4 C56.2666667,12 80,4 80,4 C80,4 80,5.33333333 80,8 L0,8 L0,4 Z"/>
+	               </g>
+	               <use x="0" y="0" xlink:href="#wavetop" />
+	         </pattern></svg>
+	   </div>
+<div class="wrapper">
+  	<div id="onboarding" class="onboarding">
+	    <h1 id='title' class="title">Your 👃 knows!</h1>
+	    <h4 id='prompt' class="prompt">Use your nose instead of the mouse</h4>
+	    <div id='SquareDropZone' class="squredrop"> </div>
+	    <button id='SquareDragBox' class="choice squre">
+	      <div class="wavebg">
+	        <svg width="100%" height="100%">
+	         <rect x="0" y="118" width="200%" height="100%" fill="url(#pattern-wave)" />
+	        </svg>
+	      </div>
+	       <div class="wavetop">
+	        <svg width="100%" height="100%">
+	         <rect x="0" y="118" width="200%" height="100%" fill="url(#pattern-wavetop)" />
+	        </svg>
+	      </div>
+	      <div class="wavefill"></div>
+	      <span id='DragBoxText' class="text">Hold still</span>
+	    </button>
+
+	    <h2 id='question' class="question">Are you ready for the challenge?</h2>
+
+	    <button id='GoButton' class="choice go">Let's Go >
+	    </button>
+    </div>
+
+	<div id="main" class="main" hidden>		
+	  <div class="question">Why is it easy for elephants to go on vacation?</div>
+	  <div id="MainDrop" class="drop">Drop your answer here</div>
+
+	  <button id='set1-1' class="choice c1">
+	    <div class="wavebg">
+	      <svg width="100%" height="100%">
+	       <rect x="0" y="118" width="200%" height="100%" fill="url(#pattern-wave)" />
+	      </svg>
+	    </div>
+	     <div class="wavetop">
+	      <svg width="100%" height="100%">
+	       <rect x="0" y="118" width="200%" height="100%" fill="url(#pattern-wavetop)" />
+	      </svg>
+	    </div>
+	    <div class="wavefill"></div>
+	    <span class="text">They don't have jobs.</span>
+	  </button>
+	  <button id='set1-2' class="choice c2" correct='true'>
+	    <div class="wavebg">
+	      <svg width="100%" height="100%">
+	       <rect x="0" y="118" width="200%" height="100%" fill="url(#pattern-wave)" />
+	      </svg>
+	    </div>
+	     <div class="wavetop">
+	      <svg width="100%" height="100%">
+	       <rect x="0" y="118" width="200%" height="100%" fill="url(#pattern-wavetop)" />
+	      </svg>
+	    </div>
+	    <div class="wavefill"></div>
+	    <span class="text">They always have their trunks with them.</span>
+	  </button>
+	  <button id='set1-3' class="choice c3">
+	    <div class="wavebg">
+	      <svg width="100%" height="100%">
+	       <rect x="0" y="118" width="200%" height="100%" fill="url(#pattern-wave)" />
+	      </svg>
+	    </div>
+	     <div class="wavetop">
+	      <svg width="100%" height="100%">
+	       <rect x="0" y="118" width="200%" height="100%" fill="url(#pattern-wavetop)" />
+	      </svg>
+	    </div>
+	    <div class="wavefill"></div>
+	    <span class="text">They don't have to pay for it.</span>
+	  </button>
+	  <div id='cancel' class="cancel">Cancel</div>
+	</div>
+
+	<div id="popup" class="popup">
+		<div>
+		 	<span id="wow">WOW</span>
+		  	<h1 id="PopupText">Your 👃 is so knowledgeable!</h1>
+	  		<button class="choice go" id="PlayAgain">Play again > </button>
+	 	</div>
+	</div>
+
+</div>
+</acc-content>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-loader.js"></script>
+<script src="../components-dist/acc-components-modified.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
