@@ -1,0 +1,198 @@
+<html>
+<head>
+  <title>May 2023 Hackathon - SVG Charts</title>
+  <style>
+    body {
+      background: cornsilk;
+      padding: 30px;
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      color: dimgrey;
+      text-transform: uppercase;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 60px;
+      margin-left: 0;
+    }
+    #chartContainer {
+      background: none;
+      width: 400px;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+      text-align: center;
+    }
+    #uiContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 330px;
+      text-align: center;
+      margin: 0 auto;"
+    }
+    #inputContainer {
+      background: #ccc;
+      display: flex;
+      justify-content: center;
+      width: 300px;
+      gap: 16px;
+      padding: 14px;
+      margin-top: 30px;
+      border-radius: 8px;
+    }
+    input {
+      border: none;
+      border-radius: 4px;
+      background-color: white;
+      width: 40px;
+    }
+    button, input[type="submit"], input[type="reset"] {
+      background: none;
+      color: inherit;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+    }
+    #generateButton {
+      text-align: center;
+      background: tomato;
+      color: white;
+      width: 330px;
+      padding: 10px;
+      border-radius: 8px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <h2>SVG Chart Generator</h2>
+  <div id="chartContainer">
+    (chart goes here)
+    <br/><br/><br/><br>
+  </div>
+  <div id="uiContainer">
+    <div id="inputContainer">
+      <input type="text" id="value1">
+      <input type="text" id="value2">
+      <input type="text" id="value3">
+      <input type="text" id="value4">
+      <input type="text" id="value5">
+    </div>
+    <button id="generateButton" onclick="makeChart()">Generate Chart</button>
+  </div>
+</body>
+<script>
+  const getCoordsForDegrees = (degrees, radius, centerX, centerY) => {
+    const radians = degrees * (Math.PI / 180);
+    const x = radius * Math.cos(radians) + centerX;
+    const y = radius * Math.sin(radians) + centerY;
+    return [x, y];
+  }
+
+  const getAllCoords = (amounts, radius, centerCoords) => {
+    const total = amounts.reduce((accum, val) => accum + val);
+    const degreePoints = []
+    let n = 0;
+    amounts.forEach((amt) => {
+      n += amt;
+      degreePoints.push((n / total) * 360);
+    });
+    degreePoints.pop();
+    return degreePoints.map(point => (getCoordsForDegrees(point, radius, centerCoords[0], centerCoords[1])));
+  }
+
+  const generatePathString = (startCoords, endCoords, centerCoords, radius, isMoreThanHalf) => {
+    // I think maybe if the amount is more than half we want 1 1, otherwise it's 0 1
+    const sweepFlags = isMoreThanHalf ? '1 1' : '0 1';
+    return `M ${startCoords[0]} ${startCoords[1]} A ${radius} ${radius} 0 ${sweepFlags} ${endCoords[0]} ${endCoords[1]} L ${centerCoords[0]} ${centerCoords[1]} Z`;
+  }
+
+  const getAllPathStrings = (amounts, allCoords, centerCoords, radius) => {
+    const zeroCoords = [radius * 2, radius];
+    const total = amounts.reduce((accum, val) => accum + val);
+    const result = [];
+    let startCoords;
+    let endCoords;
+    let isMoreThanHalf;
+    for (let i = 0; i <= allCoords.length; i++) {
+      if (i == 0) {
+        startCoords = zeroCoords;
+        endCoords = allCoords[0];
+      } else if (i == allCoords.length) {
+        startCoords = allCoords[i - 1];
+        endCoords = zeroCoords;
+      } else {
+        startCoords = allCoords[i - 1];
+        endCoords = allCoords[i];
+      }
+      isMoreThanHalf = amounts[i] > (total / 2);
+      result.push(generatePathString(startCoords, endCoords, centerCoords, radius, isMoreThanHalf));
+    }
+    return result;
+  };
+
+  const generateSvg = (pathStrings, colors, background, width, height, cx, cy, rx, ry) => {
+    const svgns = 'http://www.w3.org/2000/svg';
+    const newSvg = document.createElementNS(svgns, 'svg');
+    newSvg.setAttribute('style', `background: ${background}`);
+    newSvg.setAttribute('width', width);
+    newSvg.setAttribute('height', height);
+    newSvg.setAttribute('stroke', 'none');
+    for (let i = 0; i < pathStrings.length; i++) {
+      const newPath = document.createElementNS(svgns, 'path');
+      newPath.setAttribute('d', pathStrings[i]);
+      newPath.setAttribute('fill', colors[i]);
+      newSvg.appendChild(newPath);
+    }
+    const newEllipse = document.createElementNS(svgns, 'ellipse');
+    newEllipse.setAttribute('cx', cx);
+    newEllipse.setAttribute('cy', cy);
+    newEllipse.setAttribute('rx', rx);
+    newEllipse.setAttribute('ry', ry);
+    newEllipse.setAttribute('fill', background);
+    newSvg.appendChild(newEllipse);
+    return newSvg;
+  }
+
+  const inputToAmounts = () => {
+    let arr = [
+      document.querySelector('#value1').value,
+      document.querySelector('#value2').value,
+      document.querySelector('#value3').value,
+      document.querySelector('#value4').value,
+      document.querySelector('#value5').value
+    ];
+    return arr.filter(n => n).map(n => parseInt(n));
+  }
+
+  const radius = 200;
+  const background = 'cornsilk';
+  const container = document.getElementById("chartContainer");
+
+  const set1 = ["pink", "yellow", "turquoise", "orange", "crimson"];
+  const set2 = ["#b17ede", "#f578a4", "#ffa27e", "#e8d289", "#baeeb4"];
+  const set3 = ["#a70051", "#c2283a", "#e58754", "#ffd694", "#ffffc4"];
+  const set4 = ["#068fd1", "#06b0d5", "#4dd4dc", "#9ff3e2", "#d5fdef"];
+  const set5 = ["#ac2946", "#bb6d42", "#cda660", "#e1e09b", "#e3edd8"];
+  const allSets = [set1, set2, set3, set4, set5];
+
+  const getColorSet = () => (allSets[Math.floor(Math.random() * 5)]);
+
+  const makeChart = () => {
+    const colors = getColorSet();
+    const amounts = inputToAmounts();
+    const centerCoords = [radius, radius];
+    const allCoords = getAllCoords(amounts, radius, centerCoords);
+    const pathStrings = getAllPathStrings(amounts, allCoords, centerCoords, radius);
+    const width = radius * 2;
+    const height = radius * 2;
+    const cx = radius;
+    const cy = radius;
+    const rx = radius * .75;
+    const ry = radius * .75;
+    const svg = generateSvg(pathStrings, colors, background, width, height, cx, cy, rx, ry);
+    container.replaceChild(svg, container.childNodes[0]);
+  }
+</script>
+</html>
